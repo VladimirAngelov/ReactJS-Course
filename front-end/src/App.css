@@ -2,6 +2,7 @@ body {
     background-color: #212429;
     margin: 0;
 }
+
 a {
     text-decoration: none;
 }
@@ -27,9 +28,11 @@ a {
 .right-nav {
     float: right;
 }
+
 #landing-image {
     max-width: 100%;
 }
+
 #landing-h2 {
     color: white;
     text-align: center;
@@ -52,6 +55,54 @@ a {
 #landing-text a:hover {
     color: white;
 }
+
+.authForm label {
+    color: #ff8c00;
+    margin-top: 10px;
+}
+
+.authForm input {
+    background-color: #1d2024;
+    border: none;
+    border-radius: 5px;
+    margin-top: 5px;
+    width: 100%;
+    box-shadow: 1.5px 1.5px 1.5px black;
+    text-align: center;
+    color: darkorange;
+}
+
+.authForm {
+    position: absolute;
+    top: 20%;
+    left: 39%;
+    text-align: center;
+    font-size: 13pt;
+    /*border: 2px solid #1d2024;*/
+    /*border-radius: 50px;*/
+    width: 300px;
+    height: 260px;
+    /*background-color: #1d2024;*/
+}
+
+#registerBtn {
+    margin-top: 15px;
+    color: #ff8c00;
+    border: 1px solid #ff8c00;
+    background-color: #212429;
+    text-shadow: 2px 2px 2px black;
+    box-shadow: 2px 2px 2px black;
+}
+
+#loginBtn {
+    margin-top: 15px;
+    color: #ff8c00;
+    border: 1px solid #ff8c00;
+    background-color: #212429;
+    text-shadow: 2px 2px 2px black;
+    box-shadow: 2px 2px 2px black;
+}
+
 footer {
     color: #ff8c00;
     text-align: center;

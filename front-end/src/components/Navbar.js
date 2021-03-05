@@ -1,17 +1,18 @@
 // import logo from '../../public/logo.png'
+import {Link} from 'react-router-dom';
 
 const Navbar = (props) => {
     return (
         <div className="navigation">
             <div className="top-navbar">
                 <img id="logo" src='/logo.png' alt="the movies"/>
-                <a href="/home">Home</a>
-                <a href="/popular">Popular</a>
-                <a href="/movies">Movies</a>
-                <a href="/tv-shows">Tv Shows</a>
+                <Link to="/">Home</Link>
+                <Link to="/popular">Popular</Link>
+                <Link to="/movies">Movies</Link>
+                <Link to="/tv-shows">TV Shows</Link>
                 <div className="right-nav">
-                    <a href="/register">Sign Up</a>
-                    <a href="/login">Sign In</a>
+                    <Link to="/register">Sign Up</Link>
+                    <Link to="/login">Sign In</Link>
                 </div>
             </div>
         </div>
