@@ -1,0 +1,13 @@
+.categoryMoviePictures {
+    width: 100%;
+    margin: 5px 0 0 3px;
+}
+
+.secondLine {
+    margin-top: 3px;
+}
+
+.title {
+    text-align: center;
+    color: white;
+}

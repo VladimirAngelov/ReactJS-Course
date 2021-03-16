@@ -1,0 +1,34 @@
+#search-field {
+    padding-top: 15px;
+    float: right;
+    background-color: transparent;
+    border: 0;
+    border-bottom: 1px solid #ff8c00;
+    color: darkorange;
+    margin-right: 10px;
+    animation-duration: 2s;
+    animation-name: show;
+}
+
+#search-field::placeholder {
+    color: darkorange;
+    opacity: 60%;
+}
+
+@keyframes show {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+#search-field.hide {
+    opacity: 0;
+}
+
+*:focus{
+    outline: none;
+}

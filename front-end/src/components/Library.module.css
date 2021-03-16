@@ -1,0 +1,11 @@
+#library-container {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.library-title {
+    text-align: center;
+    color: white;
+    font-weight: initial;
+    margin: 20px 0 0 5px;
+}

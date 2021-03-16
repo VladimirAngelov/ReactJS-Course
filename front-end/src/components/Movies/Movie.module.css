@@ -1,0 +1,50 @@
+.information {
+    color: white;
+}
+
+#title {
+    text-shadow: 5px 5px 5px black;
+}
+
+.playIcon {
+    color: white;
+    position: absolute;
+    top: 35%;
+    margin-left: 150px;
+    display: none;
+    cursor: pointer;
+}
+
+.detailsImage:hover{
+    opacity: 70%;
+    cursor: pointer;
+}
+
+#description {
+    color: white;
+    margin-top: 25px;
+}
+
+#tagline {
+    color: white;
+    font-style: italic;
+    font-weight: initial;
+}
+
+.titles {
+    color: #ff8c00;
+    text-shadow: 2px 2px 2px black;
+}
+
+.test {
+    text-align: left;
+}
+
+#libraryButton {
+    color: #ff8c00;
+    border: 1px solid #ff8c00;
+    background-color: #212429;
+    box-shadow: 2px 2px 2px black;
+    border-radius: 5px;
+}
+

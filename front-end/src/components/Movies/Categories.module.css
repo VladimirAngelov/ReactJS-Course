@@ -1,0 +1,18 @@
+.title {
+    color: white;
+    font-weight: initial;
+    margin-left: 7px;
+}
+
+.categoriesImages {
+    margin: 5px 0 0 7px;
+}
+
+.categoryBox:hover {
+    opacity: 70%;
+}
+
+.categoryBox {
+    margin: 0 4px 0 0;
+    width: 100%;
+}
