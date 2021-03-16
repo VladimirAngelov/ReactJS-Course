@@ -33,11 +33,11 @@ export const getOneMovie = (movieId) => {
         .then(data => data)
 }
 // https://api.themoviedb.org/3/tv/63174?api_key=16532dc7c21d82cfd12dc3f9cda7aaa8&language=en-US
-export const getOneTvShow = (tvShowId) => {
-    return fetch(`${baseURL}tv/${tvShowId}?api_key=${API_KEY}&language=en-US`)
-        .then(res => res.json())
-        .then(data => data)
-}
+// export const getOneTvShow = (tvShowId) => {
+//     return fetch(`${baseURL}tv/${tvShowId}?api_key=${API_KEY}&language=en-US`)
+//         .then(res => res.json())
+//         .then(data => data)
+// }
 
 export const searchMovie = (movieName) => {
     while(movieName.indexOf(' ') > -1) {

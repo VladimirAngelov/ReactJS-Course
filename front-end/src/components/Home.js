@@ -10,6 +10,10 @@ import {Redirect} from "react-router-dom";
 const Home = () => {
     const [user] = useContext(Context)
 
+    if (user.username === '') {
+        return <Redirect to="/login"/>
+    }
+
     return (
         <div>
             <Navbar/>
@@ -22,7 +26,6 @@ const Home = () => {
             <div className="row">
                 <Animations/>
             </div>
-            {user.username === '' && <Redirect to="/login"/>}
         </div>
     )
 }

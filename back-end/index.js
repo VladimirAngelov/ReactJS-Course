@@ -4,7 +4,6 @@ const config = require('./config/config')
 const {register, login} = require('./services/authService');
 const {addMovieToLibrary, getUsersMovies, removeFromLibrary} = require('./services/movieService')
 
-const User = require('./Models/User');
 const jwt = require('jsonwebtoken');
 const {SECRET, COOKIE_NAME} = require('./config/config');
 const cookieParser = require('cookie-parser');
@@ -19,14 +18,14 @@ app.use(cookieParser());
 app.use(express.urlencoded({extended: true}))
 app.use(express.json());
 
-app.use((req, res, next) => {
-    const token = req.cookies['user_session'] || req.headers['user_session'];
-    next()
-})
+// app.use((req, res, next) => {
+//     const token = req.cookies['user_session'] || req.headers['user_session'];
+//     next()
+// })
 
-app.get('/getUser', (req, res, next) => {
+app.get('/getUser', (req, res) => {
     let token = req.cookies[COOKIE_NAME];
-    console.log('getUSER')
+
     jwt.verify(token , SECRET, (err, decoded) => {
         if (err) {
             res.clearCookie(COOKIE_NAME)
