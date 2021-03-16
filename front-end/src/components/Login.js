@@ -1,50 +1,69 @@
-import React, {Component} from 'react'
-import {Link, Redirect} from 'react-router-dom';
+import React, {useState, useContext} from 'react'
+import {Redirect} from 'react-router-dom';
+import Navbar from "./Navbar";
+import {Context} from "../Store/Store";
 
-export default class Login extends Component {
-    constructor(props) {
-        super(props);
+const Login = () => {
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+    const [error, setError] = useState('')
+    const [user, setUser] = useContext(Context)
 
-        this.state = {
-            username: '',
-            password: '',
-        }
+    if (user.username !== '') {
+        return <Redirect to="/"/>
     }
 
-    render() {
-        const handleSubmit = (e) => {
-            fetch(`http://localhost:5000/login`, {
-                method: 'post',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(this.state)
-            }).json().then(() => <Redirect to="/"/>)
+    const handleSubmit = (e) => {
+        e.preventDefault();
 
-            e.preventDefault();
-        }
+        return fetch(`/login`, {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({username, password})
+        }).then(res => res.json())
+            .then((token) => {
+                console.log(token)
+                if (token.message) throw new Error(token.message);
 
-        const handleChange = (event) => {
-            this.setState({
-                    [event.target.name]: event.target.value,
-                }
-            );
-        }
+                setUser({username})
+            }).catch(err => {
+                console.log(err)
+                setError(err.message)
+            });
+    }
 
-        return (
+    const updateUsername = (e) => {
+        setUsername(e.target.value)
+    }
+    const updatePassword = (e) => {
+        setPassword(e.target.value)
+    }
+
+
+
+    return (
+        <div>
+            <Navbar/>
             <div className="authForm">
                 <form onSubmit={handleSubmit} method="POST">
                     <label htmlFor="username">Username </label>
                     <br/>
-                    <input value={this.state.username} onChange={handleChange} type="text" name="username"/>
+                    <input value={username} onChange={updateUsername} type="text" name="username"/>
                     <br/>
 
                     <label htmlFor="password">Password </label>
                     <br/>
-                    <input value={this.state.password} onChange={handleChange} type="password" name="password"/>
+                    <input value={password} onChange={updatePassword} type="password"
+                           name="password"/>
                     <br/>
 
                     <input id="loginBtn" type="submit"/>
+                    <p className="error-notification">{error}</p>
+
                 </form>
             </div>
-        )
-    }
+        </div>
+    )
 }
+
+export default Login;

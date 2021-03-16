@@ -1,20 +1,56 @@
-import logo from './logo.svg';
-import './App.css';
-import Navbar from './components/Navbar';
-import GuestHome from "./components/GuestHome";
+import './App.css'
+import React, {useContext, useEffect, useState} from 'react'
+import {Route, BrowserRouter as Router, Switch} from "react-router-dom"
+import {getUser} from "./authService/getUser";
+import {Context} from "./Store/Store";
+
+import GuestHome from "./components/GuestHome"
 import Footer from './components/Footer'
 import Register from './components/Register'
 import Login from './components/Login'
-import {Route, BrowserRouter as Router} from "react-router-dom";
+import Home from './components/Home'
+import Library from './components/Library'
+import Loader from './components/Loader'
+import Categories from './components/Movies/Categories'
+import MoviesByCategory from './components/Movies/MoviesByCategory'
+import Details from './components/Movies/Details'
+import SearchResults from './components/Movies/SearchResults'
 
 function App() {
+    const [user, setUser] = useContext(Context)
+    const [isLoading, setIsLoading] = useState(true)
+    let isLoggedIn = user.username !== '';
+
+    useEffect(() => {
+        getUser().then(currentUser => {
+            if (currentUser.message) {
+                return setIsLoading(false)
+            }
+            setUser({_id: currentUser._id, username: currentUser.username})
+            setIsLoading(false)
+        })
+    }, [])
+
+    if (isLoading) {
+        return (
+            <Loader/>
+        )
+    }
+
     return (
         <Router>
             <div className="container">
-                <Navbar/>
-                <Route path="/" exact component={GuestHome}/>
-                <Route path="/register" component={Register}/>
-                <Route path="/login" component={Login}/>
+                <Switch>
+                    <Route path="/" exact component={isLoggedIn ? Home : GuestHome}/>
+                    <Route path="/movie/details/:id" exact component={Details}/>
+                    <Route path="/tv-show/details/:id" exact component={Details}/>
+                    <Route path="/register" exact component={Register}/>
+                    <Route path="/login" exact component={Login}/>
+                    <Route path="/movies" exact component={Categories}/>
+                    <Route path="/movies/:category" exact component={MoviesByCategory}/>
+                    <Route path="/results" exaxt component={SearchResults}/>
+                    <Route path="/library" exaxt component={Library}/>
+                </Switch>
                 <Footer/>
             </div>
         </Router>

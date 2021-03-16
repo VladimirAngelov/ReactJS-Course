@@ -1,57 +1,75 @@
-import React, {Component} from 'react';
-import {Link, Redirect} from 'react-router-dom';
+import React, {useState, useContext} from 'react';
+import {Redirect} from 'react-router-dom';
+import {Context} from "../Store/Store";
+import Navbar from "./Navbar";
 
-export default class Register extends Component {
-    constructor(props) {
-        super(props);
+const Register = () => {
+    const [user, setUser] = useContext(Context)
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+    const [error, setError] = useState('')
+    const [repeatPassword, setRepeatPassword] = useState('')
 
-        this.state = {
-            username: '',
-            password: '',
-            repeatPassword: ''
-        }
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        return fetch(`/register`, {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({username, password, repeatPassword})
+        }).then(res => res.json())
+            .then((token) => {
+                if (token.message) throw new Error(token.message);
+
+                setUser({username})
+            }).catch(err => {
+                console.log(err.message)
+                setError(err.message)
+            });
     }
 
-    render() {
-        const handleSubmit = (e) => {
-            fetch(`http://localhost:5000/register`, {
-                method: 'post',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(this.state)
-            }).then(() => this.props.history.push('/'))
-                .json()
+    const updateUsername = (e) => {
+        setUsername(e.target.value)
+    }
+    const updatePassword = (e) => {
+        setPassword(e.target.value)
+    }
+    const updateRepeatPassword = (e) => {
+        setRepeatPassword(e.target.value)
+    }
 
-            e.preventDefault();
-        }
+    if (user.username !== '') {
+        return <Redirect to="/"/>;
+    }
 
-        const handleChange = (event) => {
-            this.setState({
-                    [event.target.name]: event.target.value,
-                }
-            );
-        }
-
-        return (
+    return (
+        <div>
+            <Navbar/>
             <div className="authForm">
-                <form onSubmit={handleSubmit} method="POST">
+
+                <form onSubmit={handleSubmit}>
                     <label htmlFor="username">Username </label>
                     <br/>
-                    <input value={this.state.username} onChange={handleChange} type="text" name="username"/>
+                    <input value={username} onChange={updateUsername} type="text" name="username"/>
                     <br/>
 
                     <label htmlFor="password">Password </label>
                     <br/>
-                    <input value={this.state.password} onChange={handleChange} type="password" name="password"/>
+                    <input value={password} onChange={updatePassword} type="password"
+                           name="password"/>
                     <br/>
 
                     <label htmlFor="repeatPassword">Repeat password </label>
                     <br/>
-                    <input value={this.state.repeatPassword} onChange={handleChange} type="password"
+                    <input value={repeatPassword} onChange={updateRepeatPassword} type="password"
                            name="repeatPassword"/>
 
                     <input id="registerBtn" type="submit"/>
+                    <p className="error-notification">{error}</p>
+
                 </form>
             </div>
-        )
-    }
+        </div>
+    )
 }
+
+export default Register

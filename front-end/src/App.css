@@ -21,7 +21,7 @@ a {
     padding: 8px;
 }
 
-.navigation a:hover {
+.top-navbar a:hover {
     opacity: 50%;
 }
 
@@ -29,8 +29,22 @@ a {
     float: right;
 }
 
+ul {
+    /*color: white;*/
+}
+
 #landing-image {
     max-width: 100%;
+}
+
+.home-images {
+
+}
+
+.home-images:hover {
+    box-shadow: 0 15px 15px #1B1B1B;
+
+    transform: scale(1.08);
 }
 
 #landing-h2 {
@@ -101,6 +115,65 @@ a {
     background-color: #212429;
     text-shadow: 2px 2px 2px black;
     box-shadow: 2px 2px 2px black;
+}
+
+#search-icon {
+    margin-top: 19px;
+    float: right;
+    cursor: pointer;
+}
+
+#search-icon:hover {
+    opacity: 50%;
+}
+
+.home-title {
+    color: white;
+    font-weight: initial;
+    margin: 20px 0 0 5px;
+}
+
+.see-more {
+    font-size: 16px;
+    color: #ababab;
+    width: 20%;
+}
+
+.trailer-link {
+    margin-right: 100px;
+    color: white;
+    position: absolute;
+    /*top: 50%;*/
+    /*left: 50%;*/
+    /*transform: translate(-50%, -50%);*/
+}
+
+.movie {
+    color: white;
+    font-weight: lighter;
+}
+
+.home-movie-pictures {
+    margin: 5px 0 0 3px;
+}
+
+.error-notification {
+    background-color: darkred;
+    color: white;
+    width: 300px;
+    border-radius: 5px;
+    margin-top: 8px;
+    text-align: center;
+}
+
+.dropdown-menu {
+    background-color: #212429;
+    text-align: left;
+    border: 1px solid #ff8c00;
+}
+
+.dropdown-divider {
+    color: #ababab;
 }
 
 footer {
