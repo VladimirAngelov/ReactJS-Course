@@ -1,7 +1,7 @@
 const User = require('../Models/User');
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
-const {SECRET, SALT_ROUNDS, COOKIE_NAME} = require('../config/config');
+const {SECRET, SALT_ROUNDS} = require('../config/config');
 const englishPattern = /^[a-zA-Z0-9]+$/;
 
 module.exports = {
