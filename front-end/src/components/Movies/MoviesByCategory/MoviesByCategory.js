@@ -1,8 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import styles from './MoviesByCategory.module.css'
-import {getMoviesByCategory} from "../../movie-services/requests";
-import Navbar from "../Navbar";
-import Loader from "../Loader";
+import {getMovies} from "../../../movie-services/requests";
+import Loader from "../../Loader/Loader";
 import {Link} from "react-router-dom";
 
 const imageUrl = `http://image.tmdb.org/t/p/w400`
@@ -14,11 +13,12 @@ const MovieByCategory = () => {
     const path = window.location.pathname.split('/').slice(-1)[0]
 
     useEffect(() => {
-        getMoviesByCategory(path)
+        getMovies(path)
             .then(movies => {
                 setMovies(movies)
                 setIsLoading(false)
-            })
+            }).catch(err => console.log(err))
+
     }, [path])
 
     if (isLoading) {
@@ -39,9 +39,8 @@ const MovieByCategory = () => {
     const secondLine = firstLine.splice(10, 10)
 
     return (
-        <div className="row">
-            <Navbar/>
-            <div>
+        <div className={`${styles['categories-container']} row`}>
+            <div >
                 <h3 className={styles.title}>{path.toUpperCase()}</h3>
                 <div>
                     {firstLine}

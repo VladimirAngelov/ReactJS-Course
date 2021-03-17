@@ -1,11 +1,11 @@
 import React, {useState, useContext, useEffect} from 'react';
-import {Context} from "../../Store/Store";
+import {Context} from "../../../Store/Store";
 import {Redirect} from 'react-router-dom'
 import styles from './Movie.module.css'
 import YouTube from "react-youtube";
 import movieTrailer from 'movie-trailer'
-import getUserMovies from "../../authService/getUserMovies";
-import removeFromLibrary from "../../authService/removeFromLibrary";
+import getUserMovies from "../../../authService/getUserMovies";
+import removeFromLibrary from "../../../authService/removeFromLibrary";
 
 const options = {
     height: '200',
@@ -54,7 +54,7 @@ const Movie = (props) => {
                 .then(url => {
                     const urlParams = new URLSearchParams(new URL(url).search)
                     setTrailerUrl(urlParams.get('v'))
-                }).catch(err => setError('Trailer is not available right now'))
+                }).catch(err => setError('Trailer is not available'))
         }
     }
 
@@ -76,7 +76,7 @@ const Movie = (props) => {
                 if (res.message.includes('Successfully')) setIsInLibrary(false)
             })
     }
-
+    // console.log(props.movie.overview.length)
     return (
         <>
             <div className="col">
@@ -132,11 +132,12 @@ const Movie = (props) => {
                     {props.productionCompanies?.length > 0 ? props.productionCompanies : ''}
                 </p>
                 {isInLibrary
-                    ? <button id={styles.libraryButton} onClick={handleRemoveFromLibrary}>Remove from Library</button>
+                    ? <button id={styles.libraryButton} onClick={handleRemoveFromLibrary}>Remove from
+                        Library</button>
                     : <button id={styles.libraryButton} onClick={handleLibraryClick}>Add to Library</button>}
             </div>
 
-            <div className="col">
+            <div className={`${styles.video} col`}>
                 <div className="video-player">
                     {error && <p className="error-notification">{error}</p>}
                     {trailerUrl && <YouTube videoId={trailerUrl} opt={options}/>}

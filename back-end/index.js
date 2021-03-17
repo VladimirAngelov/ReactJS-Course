@@ -3,6 +3,8 @@ const app = express()
 const config = require('./config/config')
 const {register, login} = require('./services/authService');
 const {addMovieToLibrary, getUsersMovies, removeFromLibrary} = require('./services/movieService')
+const authenticated = require('./middlewares/auth')
+const isAuth = require('./middlewares/isAuth')
 
 const jwt = require('jsonwebtoken');
 const {SECRET, COOKIE_NAME} = require('./config/config');
@@ -17,35 +19,31 @@ app.use((req, res, next) => {
 app.use(cookieParser());
 app.use(express.urlencoded({extended: true}))
 app.use(express.json());
+app.use(authenticated())
 
-// app.use((req, res, next) => {
-//     const token = req.cookies['user_session'] || req.headers['user_session'];
-//     next()
-// })
+app.get('/getUser', isAuth, (req, res) => {
+    const user = req.user
 
-app.get('/getUser', (req, res) => {
-    let token = req.cookies[COOKIE_NAME];
-
-    jwt.verify(token , SECRET, (err, decoded) => {
-        if (err) {
-            res.clearCookie(COOKIE_NAME)
-            res.json({message: 'No user found'})
-        } else {
-            req.user = decoded;
-            res.json(decoded);
-        }
-    })
-})
-
-app.get('/api', (req, res) => {
-    res.json({type: 'success'})
+    if (user) {
+        res.json(user)
+    } else {
+        res.json({message: 'No user found'})
+    }
 })
 
 app.post('/register', (req, res) => {
     register(req.body)
         .then(token => {
             res.cookie(COOKIE_NAME, token, {httpOnly: true});
-            res.status(200).json(token)
+
+            jwt.verify(token, SECRET, (err, decoded) => {
+                if (err) {
+                    res.clearCookie(COOKIE_NAME);
+                } else {
+                    res.status(200).json(decoded)
+                }
+            })
+
         }).catch((error) => res.json(error))
 });
 
@@ -58,8 +56,8 @@ app.post('/login', (req, res) => {
 });
 
 app.get('/logout', (req, res) => {
-        res.clearCookie(COOKIE_NAME)
-        res.status(200).json({message: 'successfully'})
+    res.clearCookie(COOKIE_NAME)
+    res.status(200).json({message: 'successfully'})
 });
 
 app.post('/addMovieToLibrary', (req, res) => {
@@ -67,17 +65,16 @@ app.post('/addMovieToLibrary', (req, res) => {
         .then(() => res.status(200).json({message: 'Successfully added to library'}))
 })
 
-app.get('/getUserMovies', (req, res) => {
-    let token = req.cookies[COOKIE_NAME];
+app.get('/getUserMovies', isAuth, (req, res) => {
+    const user = req.user
 
-    jwt.verify(token , SECRET, (err, decoded) => {
-        if (err) {
-            res.clearCookie(COOKIE_NAME)
-        } else {
-            getUsersMovies(decoded._id)
-                .then(movies => res.status(200).json(movies))
-        }
-    })
+    if (user) {
+        getUsersMovies(user._id)
+            .then(movies => res.status(200).json(movies))
+    } else {
+        res.clearCookie(COOKIE_NAME)
+    }
+
 })
 
 app.delete('/removeFromLibrary/:movieId/:userId', (req, res) => {
@@ -86,6 +83,10 @@ app.delete('/removeFromLibrary/:movieId/:userId', (req, res) => {
 
     removeFromLibrary(movieId, userId)
         .then(() => res.status(200).json({message: 'Successfully removed from library'}))
+        .catch(err => {
+            console.log(err)
+            return res.status(200).json({message: 'Something went wrong'})
+        })
 })
 
 require('./config/mongoose')()

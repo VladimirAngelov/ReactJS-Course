@@ -1,9 +1,8 @@
 import React from 'react';
-import FeaturedMovies from "./Movies/FeaturedMovies";
-import Animations from "./Movies/Animations";
-import TopRated from "./Movies/TopRated";
-import Navbar from "./Navbar";
-import {Context} from "../Store/Store";
+import FeaturedMovies from "../Movies/home movies/FeaturedMovies";
+import Animations from "../Movies/home movies/Animations";
+import TopRated from "../Movies/home movies/TopRated";
+import {Context} from "../../Store/Store";
 import {useContext} from 'react';
 import {Redirect} from "react-router-dom";
 
@@ -16,7 +15,7 @@ const Home = () => {
 
     return (
         <div>
-            <Navbar/>
+            {/*<Navbar/>*/}
             <div className="row">
                 <FeaturedMovies/>
             </div>

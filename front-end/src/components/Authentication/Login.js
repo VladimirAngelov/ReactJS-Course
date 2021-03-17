@@ -1,7 +1,6 @@
 import React, {useState, useContext} from 'react'
 import {Redirect} from 'react-router-dom';
-import Navbar from "./Navbar";
-import {Context} from "../Store/Store";
+import {Context} from "../../Store/Store";
 
 const Login = () => {
     const [username, setUsername] = useState('')
@@ -43,7 +42,6 @@ const Login = () => {
 
     return (
         <div>
-            <Navbar/>
             <div className="authForm">
                 <form onSubmit={handleSubmit} method="POST">
                     <label htmlFor="username">Username </label>

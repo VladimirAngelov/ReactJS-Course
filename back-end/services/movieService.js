@@ -4,7 +4,7 @@ module.exports = {
     addMovieToLibrary: async ({userId, movie}) => {
         let user = await User.findById(userId);
 
-        user.movieLibrary.push(movie)
+        user.movieLibrary?.push(movie)
 
         return user.save()
     },

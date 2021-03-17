@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
-import {getData} from "../../movie-services/requests";
+import {getMovies} from "../../../movie-services/requests";
 import {Link} from "react-router-dom";
-import Loader from "../Loader";
+import Loader from "../../Loader/Loader";
 
 const imageUrl = `http://image.tmdb.org/t/p/w400`
 
@@ -16,7 +16,7 @@ export default class FeaturedMovies extends Component {
     }
 
     componentDidMount() {
-        getData('popular')
+        getMovies('popular')
             .then((res) => {
                 let data = res.slice(0, 10)
                 this.setState({data: data, isLoading: false})

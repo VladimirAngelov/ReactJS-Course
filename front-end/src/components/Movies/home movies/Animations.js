@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
-import {getData} from "../../movie-services/requests";
+import {getMovies} from "../../../movie-services/requests";
 const imageUrl = `http://image.tmdb.org/t/p/w400`
 
 export default class Animations extends Component {
@@ -13,7 +13,7 @@ export default class Animations extends Component {
     }
 
     componentDidMount() {
-        getData('animations')
+        getMovies('animations')
             .then((res) => {
                 let data = res.slice(0, 10)
                 this.setState({data: data})

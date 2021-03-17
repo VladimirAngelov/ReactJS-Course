@@ -1,8 +1,7 @@
 import {useState, useEffect} from 'react';
 import {getOneMovie,
     // getOneTvShow
-} from "../../movie-services/requests";
-import Navbar from "../Navbar";
+} from "../../../movie-services/requests";
 import Movie from './Movie'
 
 const Details = () => {
@@ -30,7 +29,6 @@ const Details = () => {
 
     return (
         <div className="row">
-            <Navbar/>
             <Movie movie={movie} genres={genres} contries={countries} productionCompanies={productionCompanies}/>
         </div>
     )

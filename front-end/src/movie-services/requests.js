@@ -4,6 +4,11 @@ const baseURL = `https://api.themoviedb.org/3/`
 const requests = {
     popular: `discover/movie?api_key=${API_KEY}&sort_by=popularity.desc`,
     // 'netflix-originals': `discover/tv?api_key=${API_KEY}&with_networks=213`,
+    fantasy: `discover/movie?api_key=${API_KEY}&with_genres=14`,
+    adventure: `discover/movie?api_key=${API_KEY}&with_genres=12`,
+    thriller: `discover/movie?api_key=${API_KEY}&with_genres=53`,
+    crime: `discover/movie?api_key=${API_KEY}&with_genres=80`,
+    mystery: `discover/movie?api_key=${API_KEY}&with_genres=9648`,
     animations: `discover/movie?api_key=${API_KEY}&with_genres=16`,
     drama: `discover/movie?api_key=${API_KEY}&with_genres=18`,
     'top-rated': `movie/top_rated?api_key=${API_KEY}`,
@@ -12,20 +17,20 @@ const requests = {
     horror: `discover/movie?api_key=${API_KEY}&with_genres=27`,
     romance: `discover/movie?api_key=${API_KEY}&with_genres=10749`,
     documentariesMovies: `discover/movie?api_key=${API_KEY}&with_genres=99`,
-    'tv-shows': `tv/popular?api_key=${API_KEY}&language=en-US`
+    // 'tv-shows': `tv/popular?api_key=${API_KEY}&language=en-US`
 }
 // tv/popular?api_key=<16532dc7c21d82cfd12dc3f9cda7aaa8&language=en-US&page=1
-export const getData = (type) => {
+export const getMovies = (type) => {
     return fetch(`${baseURL}${requests[type]}`)
         .then(res => res.json())
         .then(data => data.results)
 }
 
-export const getMoviesByCategory = (type) => {
-    return fetch(`${baseURL}${requests[type]}`)
-        .then(res => res.json())
-        .then(data => data.results)
-}
+// export const getMoviesByCategory = (type) => {
+//     return fetch(`${baseURL}${requests[type]}`)
+//         .then(res => res.json())
+//         .then(data => data.results)
+// }
 // https://api.themoviedb.org/3/movie/587807?api_key=16532dc7c21d82cfd12dc3f9cda7aaa8&language=en-US
 export const getOneMovie = (movieId) => {
     return fetch(`${baseURL}movie/${movieId}?api_key=${API_KEY}&language=en-US`)

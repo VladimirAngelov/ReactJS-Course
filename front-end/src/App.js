@@ -4,17 +4,18 @@ import {Route, BrowserRouter as Router, Switch} from "react-router-dom"
 import {getUser} from "./authService/getUser";
 import {Context} from "./Store/Store";
 
-import GuestHome from "./components/GuestHome"
+import Navbar from "./components/Navbar/Navbar";
+import GuestHome from "./components/GuestHome/GuestHome"
 import Footer from './components/Footer'
-import Register from './components/Register'
-import Login from './components/Login'
-import Home from './components/Home'
-import Library from './components/Library'
-import Loader from './components/Loader'
-import Categories from './components/Movies/Categories'
-import MoviesByCategory from './components/Movies/MoviesByCategory'
-import Details from './components/Movies/Details'
-import SearchResults from './components/Movies/SearchResults'
+import Register from './components/Authentication/Register'
+import Login from './components/Authentication/Login'
+import Home from './components/Home/Home'
+import Library from './components/Library/Library'
+import Loader from './components/Loader/Loader'
+import Categories from './components/Movies/Categories/Categories'
+import MoviesByCategory from './components/Movies/MoviesByCategory/MoviesByCategory'
+import Details from './components/Movies/MovieDetails/Details'
+import SearchResults from './components/Movies/Search/SearchResults'
 
 function App() {
     const [user, setUser] = useContext(Context)
@@ -28,8 +29,9 @@ function App() {
             }
             setUser({_id: currentUser._id, username: currentUser.username})
             setIsLoading(false)
-        })
-    }, [])
+        }).catch(err => console.log(err))
+
+    }, [setUser])
 
     if (isLoading) {
         return (
@@ -40,6 +42,7 @@ function App() {
     return (
         <Router>
             <div className="container">
+                <Navbar/>
                 <Switch>
                     <Route path="/" exact component={isLoggedIn ? Home : GuestHome}/>
                     <Route path="/movie/details/:id" exact component={Details}/>
@@ -48,11 +51,11 @@ function App() {
                     <Route path="/login" exact component={Login}/>
                     <Route path="/movies" exact component={Categories}/>
                     <Route path="/movies/:category" exact component={MoviesByCategory}/>
-                    <Route path="/results" exaxt component={SearchResults}/>
+                    <Route path="/results/:search" exaxt component={SearchResults}/>
                     <Route path="/library" exaxt component={Library}/>
                 </Switch>
-                <Footer/>
             </div>
+            <Footer/>
         </Router>
     )
 }

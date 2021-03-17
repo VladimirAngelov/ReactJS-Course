@@ -48,3 +48,6 @@
     border-radius: 5px;
 }
 
+.video {
+    max-width: 50%;
+}

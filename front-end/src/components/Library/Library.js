@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from 'react'
-import getUserMovies from "../authService/getUserMovies";
-import style from "./Movies/SearchResults.module.css";
+import getUserMovies from "../../authService/getUserMovies";
+import style from "../Movies/Search/SearchResults.module.css";
 import {Link} from "react-router-dom";
 import libraryStyle from './Library.module.css'
-import Navbar from "./Navbar";
-import Loader from "./Loader";
+import Loader from "../Loader/Loader";
 
 const imageUrl = `http://image.tmdb.org/t/p/w400/`
 
@@ -18,10 +17,9 @@ const Library = () => {
                 setLibrary(movies)
                 setIsLoading(false)
 
-            })
+            }).catch(err => console.log(err))
     }, [isLoading])
 
-    console.log(isLoading)
     if (isLoading) {
         return (
             <Loader/>
@@ -42,7 +40,6 @@ const Library = () => {
 
     return (
         <>
-            <Navbar/>
             <h3 className={libraryStyle['library-title']}>Your Library</h3>
 
             <div id={libraryStyle['library-container']}>

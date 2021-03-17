@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {getData} from "../../movie-services/requests"
+import {getMovies} from "../../../movie-services/requests"
 import {Link} from "react-router-dom";
 const imageUrl = `http://image.tmdb.org/t/p/w400`
 
@@ -13,7 +13,7 @@ export default class TopRated extends Component {
     }
 
     componentDidMount() {
-        getData('top-rated')
+        getMovies('top-rated')
             .then((res) => {
                 let data = res.slice(0, 10)
                 this.setState({data: data})

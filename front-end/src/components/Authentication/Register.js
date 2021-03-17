@@ -1,7 +1,6 @@
 import React, {useState, useContext} from 'react';
 import {Redirect} from 'react-router-dom';
-import {Context} from "../Store/Store";
-import Navbar from "./Navbar";
+import {Context} from "../../Store/Store";
 
 const Register = () => {
     const [user, setUser] = useContext(Context)
@@ -17,10 +16,10 @@ const Register = () => {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({username, password, repeatPassword})
         }).then(res => res.json())
-            .then((token) => {
-                if (token.message) throw new Error(token.message);
+            .then((user) => {
+                if (user.message) throw new Error(user.message);
 
-                setUser({username})
+                setUser({_id: user._id, username: user.username})
             }).catch(err => {
                 console.log(err.message)
                 setError(err.message)
@@ -43,7 +42,6 @@ const Register = () => {
 
     return (
         <div>
-            <Navbar/>
             <div className="authForm">
 
                 <form onSubmit={handleSubmit}>
