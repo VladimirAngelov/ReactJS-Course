@@ -1,0 +1,35 @@
+.top-navbar a {
+    float: left;
+    text-align: center;
+    padding: 16px 10px;
+    text-decoration: none;
+    color: #ff8c00;
+    font-size: 14pt;
+}
+
+.top-navbar a:hover {
+    opacity: 50%;
+}
+
+.right-nav {
+    float: right;
+}
+
+#logo {
+    float: left;
+    padding: 8px;
+}
+
+#search-icon {
+    margin-top: 19px;
+    float: right;
+    cursor: pointer;
+}
+
+#search-icon:hover {
+    opacity: 50%;
+}
+
+/*#search {*/
+/*    display: none;*/
+/*}*/

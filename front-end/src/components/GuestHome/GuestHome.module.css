@@ -1,0 +1,26 @@
+#landing-image {
+    max-width: 100%;
+}
+
+#landing-h2 {
+    color: white;
+    text-align: center;
+    margin: 15px;
+}
+
+#landing-text {
+    color: #ababab;
+    text-align: center;
+    margin: 25px;
+    font-weight: lighter;
+}
+
+#landing-text a {
+    text-decoration: underline;
+    font-weight: bold;
+    color: #ababab;
+}
+
+#landing-text a:hover {
+    color: white;
+}

@@ -1,0 +1,21 @@
+.home-images:hover {
+    box-shadow: 0 15px 15px #1B1B1B;
+
+    transform: scale(1.08);
+}
+
+.home-title {
+    color: white;
+    font-weight: initial;
+    margin: 20px 0 0 5px;
+}
+
+.see-more {
+    font-size: 16px;
+    color: #ababab;
+    width: 20%;
+}
+
+.home-movie-pictures {
+    margin: 5px 0 0 3px;
+}
