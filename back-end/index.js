@@ -51,7 +51,15 @@ app.post('/login', (req, res) => {
     login(req.body)
         .then(token => {
             res.cookie(COOKIE_NAME, token, {httpOnly: true});
-            res.status(200).json(token)
+
+            jwt.verify(token, SECRET, (err, decoded) => {
+                if (err) {
+                    res.clearCookie(COOKIE_NAME);
+                } else {
+                    res.status(200).json(decoded)
+                }
+            })
+
         }).catch((error) => res.json(error))
 });
 

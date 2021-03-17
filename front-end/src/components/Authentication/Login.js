@@ -20,11 +20,10 @@ const Login = () => {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({username, password})
         }).then(res => res.json())
-            .then((token) => {
-                console.log(token)
-                if (token.message) throw new Error(token.message);
+            .then((user) => {
+                if (user.message) throw new Error(user.message);
 
-                setUser({username})
+                setUser({_id: user._id, username: user.username})
             }).catch(err => {
                 console.log(err)
                 setError(err.message)
@@ -37,7 +36,6 @@ const Login = () => {
     const updatePassword = (e) => {
         setPassword(e.target.value)
     }
-
 
 
     return (
