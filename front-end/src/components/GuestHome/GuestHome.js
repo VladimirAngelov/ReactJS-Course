@@ -5,8 +5,20 @@ import styles from './GuestHome.module.css'
 
 const GuestHome = (props) => {
     const [user] = useContext(Context)
-    console.log(user);
 
+    const test = () => {
+        return fetch(`/login`, {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({username: 'vlad', password: 'asdasd'})
+        }).then(res => res.json())
+            .then((user) => {
+                if (user.message) throw new Error(user.message);
+                console.log(user)
+            }).catch(err => {
+                console.log(err)
+            });
+    }
     return (
         <div>
             <img id={styles["landing-image"]} src="/landing-image.png" alt=""/>
@@ -14,6 +26,7 @@ const GuestHome = (props) => {
             <h4 id={styles['landing-text']}>Don’t have an account yet? <Link to="/register">Sign Up</Link><br/>
                 or <Link to="/login">Sign In</Link></h4>
             {user.username !== '' && <Redirect to="/home"/>}
+            <button onClick={test}>Click</button>
         </div>
     )
 }

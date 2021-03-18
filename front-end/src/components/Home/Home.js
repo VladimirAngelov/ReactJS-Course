@@ -15,7 +15,6 @@ const Home = () => {
 
     return (
         <div>
-            {/*<Navbar/>*/}
             <div className="row">
                 <FeaturedMovies/>
             </div>

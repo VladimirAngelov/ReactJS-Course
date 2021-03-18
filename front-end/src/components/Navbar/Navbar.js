@@ -16,12 +16,12 @@ const Navbar = () => {
         return logout().then(() => {
             isLoggedOut = true;
             return setUser({username: '', _id: ''})
-        })
+        }).catch(err => console.log(err))
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if(search) {
+        if (search) {
             history.push(`/results/${search}`);
             setSearch('');
         }
@@ -43,7 +43,8 @@ const Navbar = () => {
                     {user?.username !== '' ? '' : <Link to="/login">Sign In</Link>}
                 </div>
                 {user?.username !== '' ?
-                    <img onClick={(e) => search ? handleSubmit(e) : setSearchInput(!searchInput)} id={styles["search-icon"]}
+                    <img onClick={(e) => search ? handleSubmit(e) : setSearchInput(!searchInput)}
+                         id={styles["search-icon"]}
                          src="/icons8-search-20.png" alt=""/> : ''}
 
                 {searchInput && <Search {...{search, setSearch, handleSubmit}} />}

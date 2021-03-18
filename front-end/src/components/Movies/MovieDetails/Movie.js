@@ -6,6 +6,7 @@ import YouTube from "react-youtube";
 import movieTrailer from 'movie-trailer'
 import getUserMovies from "../../../authService/getUserMovies";
 import removeFromLibrary from "../../../authService/removeFromLibrary";
+import BasicInformation from "./BasicInformation";
 
 const options = {
     height: '200',
@@ -22,6 +23,7 @@ const Movie = (props) => {
     const [trailerUrl, setTrailerUrl] = useState('')
     const [error, setError] = useState('')
     const [isInLibrary, setIsInLibrary] = useState(false)
+    const [isLarge, setIsLarge] = useState(false)
     const movieId = window.location.pathname.match(/\d+/)[0]
 
     const icon = document.getElementById('play-icon')
@@ -49,9 +51,12 @@ const Movie = (props) => {
     const handleTrailerClick = (movie) => {
         if (trailerUrl) {
             setTrailerUrl('')
+            setIsLarge(false)
         } else {
             movieTrailer(movie?.title || '')
                 .then(url => {
+                    if (props.movie.overview?.length > 200) setIsLarge(true)
+
                     const urlParams = new URLSearchParams(new URL(url).search)
                     setTrailerUrl(urlParams.get('v'))
                 }).catch(err => setError('Trailer is not available'))
@@ -76,7 +81,7 @@ const Movie = (props) => {
                 if (res.message.includes('Successfully')) setIsInLibrary(false)
             })
     }
-    // console.log(props.movie.overview.length)
+
     return (
         <>
             <div className="col">
@@ -101,36 +106,9 @@ const Movie = (props) => {
                     {props.movie.overview}
                 </p>
 
-                <p className={styles.information}>
-                    <span className={styles.titles}>Release Date: </span>
-                    {props.movie.release_date || props.movie.first_air_date}
-                </p>
+                {!isLarge && <BasicInformation movie={props.movie} genres={props.genres} countries={props.countries}
+                                               productionCompanies={props.productionCompanies}/>}
 
-                <p className={styles.information}>
-                    <span className={styles.titles}>Genres: </span>
-                    {props.genres}
-                </p>
-
-                <p className={styles.information}>
-                    {props.countries?.length > 0 ? <span className={styles.titles}>Contries: </span> : ''}
-                    {props.countries?.length > 0 ? props.countries : ''}
-                </p>
-
-                <p className={styles.information}>
-                    {props.movie.budget > 0 ? <span className={styles.titles}>Budget: </span> : ''}
-                    {props.movie.budget > 0 ? '$' + props.movie.budget : ''}
-                </p>
-
-                <p className={styles.information}>
-                    {props.movie?.runtime > 0 ? <span className={styles.titles}>Runtime: </span> : ''}
-                    {props.movie?.runtime > 0 ? props.movie.runtime + 'm.' : ''}
-                </p>
-
-                <p className={styles.information}>
-                    {props.productionCompanies?.length > 0 ?
-                        <span className={styles.titles}>Production Companies: </span> : ''}
-                    {props.productionCompanies?.length > 0 ? props.productionCompanies : ''}
-                </p>
                 {isInLibrary
                     ? <button id={styles.libraryButton} onClick={handleRemoveFromLibrary}>Remove from
                         Library</button>
@@ -141,6 +119,8 @@ const Movie = (props) => {
                 <div className="video-player">
                     {error && <p className="error-notification">{error}</p>}
                     {trailerUrl && <YouTube videoId={trailerUrl} opt={options}/>}
+                    {isLarge && <BasicInformation movie={props.movie} genres={props.genres} countries={props.countries}
+                                                  productionCompanies={props.productionCompanies}/>}
                 </div>
             </div>
             {user.username === '' && <Redirect to="/login"/>}

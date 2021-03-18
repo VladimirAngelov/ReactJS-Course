@@ -22,7 +22,6 @@ const Login = () => {
         }).then(res => res.json())
             .then((user) => {
                 if (user.message) throw new Error(user.message);
-
                 setUser({_id: user._id, username: user.username})
             }).catch(err => {
                 console.log(err)
