@@ -24,7 +24,7 @@ const Login = () => {
         }).then(res => res.json())
             .then((response) => {
                 console.log(response)
-                setCookie('user_session', response.token)
+                // setCookie('user_session', response.token)
                 if (response.message) throw new Error(response.message);
                 setUser({_id: response.user._id, username: response.user.username})
             }).catch(err => {
