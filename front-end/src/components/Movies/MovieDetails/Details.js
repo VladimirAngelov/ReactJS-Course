@@ -8,19 +8,10 @@ const Details = () => {
     const [movie, setMovie] = useState({})
     const movieId = window.location.pathname.match(/\d+/)[0]
 
-    // const contentType = window.location.pathname.split('/')[1]
-
     useEffect(() => {
-        // if (contentType === 'movie') {
             getOneMovie(movieId)
                 .then(res => setMovie(res))
                 .catch(err => console.log(err))
-        // }
-        // else {
-        //     getOneTvShow(movieId)
-        //         .then(res => setMovie(res))
-        //         .catch(err => console.log(err))
-        // }
     }, [movieId])
 
     console.log(movie.overview?.length)

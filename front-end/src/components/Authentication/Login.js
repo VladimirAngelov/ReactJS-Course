@@ -1,12 +1,14 @@
 import React, {useState, useContext} from 'react'
 import {Redirect} from 'react-router-dom';
 import {Context} from "../../Store/Store";
+import {useCookies} from "react-cookie";
 
 const Login = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
     const [user, setUser] = useContext(Context)
+    const [cookies, setCookie, removeCookie] = useCookies()
 
     if (user.username !== '') {
         return <Redirect to="/"/>
@@ -20,9 +22,11 @@ const Login = () => {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({username, password})
         }).then(res => res.json())
-            .then((user) => {
-                if (user.message) throw new Error(user.message);
-                setUser({_id: user._id, username: user.username})
+            .then((response) => {
+                console.log(response)
+                setCookie('user_session', response.token)
+                if (response.message) throw new Error(response.message);
+                setUser({_id: response.user._id, username: response.user.username})
             }).catch(err => {
                 console.log(err)
                 setError(err.message)

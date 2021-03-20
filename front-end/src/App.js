@@ -24,6 +24,7 @@ function App() {
 
     useEffect(() => {
         getUser().then(currentUser => {
+            console.log(currentUser)
             if (currentUser.message) {
                 return setIsLoading(false)
             }
