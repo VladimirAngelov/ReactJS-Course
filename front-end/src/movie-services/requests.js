@@ -1,6 +1,9 @@
 const API_KEY = '16532dc7c21d82cfd12dc3f9cda7aaa8'
 const baseURL = `https://api.themoviedb.org/3/`
 
+//credits movieID
+//  movie/791373/credits?api_key=16532dc7c21d82cfd12dc3f9cda7aaa8
+
 const requests = {
     popular: `discover/movie?api_key=${API_KEY}&sort_by=popularity.desc`,
     // 'netflix-originals': `discover/tv?api_key=${API_KEY}&with_networks=213`,
@@ -51,5 +54,9 @@ export const searchMovie = (movieName) => {
 
     return fetch(`${baseURL}search/movie?api_key=${API_KEY}&query=${movieName}`)
         .then(res => res.json())
-        // .then(movie => console.log(movie))
+}
+
+export const getMovieCredits = (movieId) => {
+    return fetch(`${baseURL}movie/${movieId}/credits?api_key=${API_KEY}`)
+        .then(res => res.json())
 }

@@ -1,7 +1,5 @@
 import {useState, useEffect} from 'react';
-import {getOneMovie,
-    // getOneTvShow
-} from "../../../movie-services/requests";
+import {getOneMovie,} from "../../../movie-services/requests";
 import Movie from './Movie'
 
 const Details = () => {
@@ -14,7 +12,7 @@ const Details = () => {
                 .catch(err => console.log(err))
     }, [movieId])
 
-    console.log(movie.overview?.length)
+
     const genres = movie.genres?.map(g => g.name).join(', ')
     const countries = movie.production_countries?.map(c => c.name).join(', ')
     const productionCompanies = movie.production_companies?.map(c => c.name).join(', ')

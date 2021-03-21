@@ -4,7 +4,7 @@
     background-color: transparent;
     border: 0;
     border-bottom: 1px solid #ff8c00;
-    color: darkorange;
+    color: #ff8c00;
     margin-right: 10px;
     animation-duration: 2s;
     animation-name: show;
@@ -12,7 +12,7 @@
 
 #search-field::placeholder {
     color: darkorange;
-    opacity: 60%;
+    opacity: 0.6;
 }
 
 @keyframes show {
