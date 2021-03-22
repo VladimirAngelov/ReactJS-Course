@@ -25,7 +25,7 @@ const Movie = (props) => {
     const [error, setError] = useState('')
     const [isInLibrary, setIsInLibrary] = useState(false)
     const [isLarge, setIsLarge] = useState(false)
-    const movieId = window.location.pathname.match(/\d+/)[0]
+    const movieId = props.movie.id
 
     const icon = document.getElementById('play-icon')
     const image = document.getElementById('details-image')
@@ -33,20 +33,19 @@ const Movie = (props) => {
     useEffect(() => {
         return getUserMovies()
             .then(movies => {
-                const found = movies.find(m => m.id.toString() === movieId)
-
+                const found = movies.find(m => m.id.toString() === movieId?.toString())
                 if (found) setIsInLibrary(true)
             })
     }, [movieId])
 
     const handleOnMouseOver = () => {
-        icon.style.display = 'block'
+        icon.style.opacity = '1';
         image.style.opacity = '70%'
     }
 
     const handleOnMouseOut = () => {
         image.style.opacity = '100%'
-        return icon.style.display = 'none'
+        return icon.style.opacity = '0.5'
     }
 
     const handleTrailerClick = (movie) => {
@@ -126,7 +125,7 @@ const Movie = (props) => {
             </div>
             {user.username === '' && <Redirect to="/login"/>}
             <div className="row">
-                <MovieCredits/>
+                <MovieCredits movieId={props.movie.id}/>
             </div>
         </>
     )

@@ -1,20 +1,29 @@
 .categoryMoviePictures {
     width: 100%;
-    margin: 5px 0 0 3px;
+    margin: 5px 0 3px 3px;
 }
 
 .categories-container {
-    max-height: calc(100vh - 280px);
+    margin-bottom: 20px;
 }
 
 .secondLine {
     margin-top: 3px;
-    max-height: calc(100vh - 300px);
-
 }
 
 .title {
     text-align: center;
     color: white;
     font-weight: initial;
+}
+
+#show-more-movies-button {
+    margin: 15px 0 20px 0;
+    color: #ff8c00;
+    border: 1px solid #ff8c00;
+    border-radius: 5px;
+    background-color: #212429;
+    text-shadow: 2px 2px 2px black;
+    box-shadow: 2px 2px 2px black;
+    width: 100%;
 }

@@ -1,10 +1,14 @@
-import {useContext} from 'react'
+import React, {useContext} from 'react'
 import {Link, Redirect} from 'react-router-dom';
 import style from './Categories.module.css'
 import {Context} from "../../../Store/Store";
 
 const Categories = () => {
     const [user] = useContext(Context)
+
+    if (user.username === '') {
+        return <Redirect to="/login"/>
+    }
 
     return (
         <div>
@@ -36,7 +40,6 @@ const Categories = () => {
                                                                                  height={350} alt="mystery"/></Link>
                     <Link to="/movies/crime" className={style.categoryBox}><img src="/crime.jpg" width={254}
                                                                                   height={350} alt="crime"/></Link>
-                    {user.username === '' && <Redirect to="/login"/>}
                 </div>
             </div>
         </div>

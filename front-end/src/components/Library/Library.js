@@ -1,15 +1,17 @@
-import React, {useEffect, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import getUserMovies from "../../authService/getUserMovies";
 import style from "../Movies/Search/SearchResults.module.css";
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import libraryStyle from './Library.module.css'
 import Loader from "../Loader/Loader";
+import {Context} from "../../Store/Store";
 
 const imageUrl = `http://image.tmdb.org/t/p/w400/`
 
 const Library = () => {
     const [library, setLibrary] = useState([])
     const [isLoading, setIsLoading] = useState(true)
+    const [user] = useContext(Context)
 
     useEffect(() => {
         return getUserMovies()
@@ -19,6 +21,10 @@ const Library = () => {
 
             }).catch(err => console.log(err))
     }, [isLoading])
+
+    if (user.username === '') {
+        return <Redirect to="/login"/>
+    }
 
     if (isLoading) {
         return (

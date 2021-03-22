@@ -23,8 +23,8 @@ const requests = {
     // 'tv-shows': `tv/popular?api_key=${API_KEY}&language=en-US`
 }
 // tv/popular?api_key=<16532dc7c21d82cfd12dc3f9cda7aaa8&language=en-US&page=1
-export const getMovies = (type) => {
-    return fetch(`${baseURL}${requests[type]}`)
+export const getMovies = (type, pageNumber) => {
+    return fetch(`${baseURL}${requests[type]}&page=${pageNumber}`)
         .then(res => res.json())
         .then(data => data.results)
 }

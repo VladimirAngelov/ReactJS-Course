@@ -1,26 +1,44 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import styles from './MoviesByCategory.module.css'
 import {getMovies} from "../../../movie-services/requests";
 import Loader from "../../Loader/Loader";
-import {Link} from "react-router-dom";
-
+import {Link, Redirect} from "react-router-dom";
+import {Context} from "../../../Store/Store";
 const imageUrl = `http://image.tmdb.org/t/p/w400`
 
-const MovieByCategory = () => {
+const MovieByCategory = (props) => {
     const [movies, setMovies] = useState([])
     const [isLoading, setIsLoading] = useState(true)
     const [counter, setCounter] = useState(1)
+    const [user] = useContext(Context)
 
-    const path = window.location.pathname.split('/').slice(-1)[0]
+    const path = props.match.params.category
 
     useEffect(() => {
-        getMovies(path)
+        setCounter(counter + 1)
+
+        getMovies(path, counter)
             .then(movies => {
                 setMovies(movies)
                 setIsLoading(false)
             }).catch(err => console.log(err))
 
     }, [path])
+
+    const loadMore = () => {
+        setCounter(counter + 1)
+        return getMovies(path, counter)
+            .then(movies => {
+                setMovies((prevState) => {
+                    return (prevState.concat(movies))
+                })
+                setIsLoading(false)
+            }).catch(err => console.log(err))
+    }
+
+    if (user.username === '') {
+        return <Redirect to="/login"/>
+    }
 
     if (isLoading) {
         return (
@@ -35,38 +53,17 @@ const MovieByCategory = () => {
                              alt={movie.title}/>
                     </Link>
             </span>)
-    const secondLine = firstLine.splice(10, 10)
 
     return (
         <div className={`${styles['categories-container']} row`}>
-            <div >
+            <div>
                 <h3 className={styles.title}>{path.toUpperCase()}</h3>
                 <div className={styles.secondLine}>
                     {firstLine}
+                    <button id={styles['show-more-movies-button']} onClick={loadMore}>
+                        Show More
+                    </button>
                 </div>
-                <div className={styles.secondLine}>
-                    {secondLine}
-                </div>
-
-                {/*<div className={styles.secondLine}>*/}
-                {/*    {counter > 1 && secondLine}*/}
-                {/*</div>*/}
-
-                {/*<div className={styles.secondLine}>*/}
-                {/*    {counter > 2 && secondLine}*/}
-                {/*</div>*/}
-
-                {/*<div className={styles.secondLine}>*/}
-                {/*    {counter > 3 && secondLine}*/}
-                {/*</div>*/}
-
-                {/*<div className={styles.secondLine}>*/}
-                {/*    {counter > 4 && secondLine}*/}
-                {/*</div>*/}
-
-                {/*<div style={{textAlign: 'center'}}>*/}
-                {/*    { counter < 5 && <button onClick={() => setCounter(counter + 1)} style={{color: 'white', marginTop: 20, fontSize: 20, border: 0, background: 'transparent'}}>Show More</button>}*/}
-                {/*</div>*/}
             </div>
         </div>
     )

@@ -41,7 +41,7 @@ function App() {
     }
 
     return (
-        <Router>
+        <HashRouter>
             <div className="container">
                 <Navbar/>
                 <Switch>
@@ -56,9 +56,9 @@ function App() {
                     <Route path="/library" exaxt component={Library}/>
                     <Route component={PageNotFound}/>
                 </Switch>
-            </div>
             <Footer/>
-        </Router>
+            </div>
+        </HashRouter>
     )
 }
 

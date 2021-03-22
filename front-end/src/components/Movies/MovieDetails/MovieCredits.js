@@ -4,11 +4,11 @@ import styles from './MovieCredits.module.css'
 
 const imageUrl = `http://image.tmdb.org/t/p/w400`
 
-const MovieCredits = () => {
+const MovieCredits = (props) => {
     const [credits, setCredits] = useState([])
     const [fullCast, setFullCast] = useState(false);
 
-    const movieId = window.location.pathname.match(/\d+/)[0]
+    const movieId = props?.movieId
 
     useEffect(() => {
         getMovieCredits(movieId)
@@ -17,7 +17,7 @@ const MovieCredits = () => {
             })
     }, [movieId])
 
-    const movieFullCast = credits.map(c =>
+    const movieFullCast = credits?.map(c =>
         <div key={c.id} style={{maxWidth: 162, textAlign: 'center'}}>
                 <img className={styles['cast-pictures']}
                      src={c.profile_path !== null ? `${imageUrl + c.profile_path}` : `/profile-picture.png`} width={126}
@@ -28,7 +28,7 @@ const MovieCredits = () => {
         </div>
     )
 
-    const moviePartCast = movieFullCast.slice(0, 8)
+    const moviePartCast = movieFullCast?.slice(0, 8)
 
     return (
         <>
