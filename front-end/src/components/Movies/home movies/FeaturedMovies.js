@@ -16,7 +16,7 @@ export default class FeaturedMovies extends Component {
     }
 
     componentDidMount() {
-        getMovies('popular')
+        getMovies('featured')
             .then((res) => {
                 let data = res.slice(0, 10)
                 this.setState({data: data, isLoading: false})
@@ -36,7 +36,7 @@ export default class FeaturedMovies extends Component {
         return (
             <div className="">
 
-                <Link to="/movies/popular"><h4 className="home-title">Featured<span
+                <Link to="/movies/featured"><h4 className="home-title">Featured<span
                     className="see-more"> See more</span></h4></Link>
 
                 <div className="home-movie-pictures">

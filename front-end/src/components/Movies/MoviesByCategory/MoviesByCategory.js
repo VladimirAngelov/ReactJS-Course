@@ -9,7 +9,7 @@ const imageUrl = `http://image.tmdb.org/t/p/w400`
 const MovieByCategory = () => {
     const [movies, setMovies] = useState([])
     const [isLoading, setIsLoading] = useState(true)
-    {/*const [counter, setCounter] = useState(1)*/}
+    const [counter, setCounter] = useState(1)
 
     const path = window.location.pathname.split('/').slice(-1)[0]
 
@@ -37,7 +37,6 @@ const MovieByCategory = () => {
             </span>)
     const secondLine = firstLine.splice(10, 10)
 
-    // console.log(counter)
     return (
         <div className={`${styles['categories-container']} row`}>
             <div >

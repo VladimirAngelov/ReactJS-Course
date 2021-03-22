@@ -7,6 +7,7 @@ import movieTrailer from 'movie-trailer'
 import getUserMovies from "../../../authService/getUserMovies";
 import removeFromLibrary from "../../../authService/removeFromLibrary";
 import BasicInformation from "./BasicInformation";
+import MovieCredits from "./MovieCredits";
 
 const options = {
     height: '200',
@@ -124,6 +125,9 @@ const Movie = (props) => {
                 </div>
             </div>
             {user.username === '' && <Redirect to="/login"/>}
+            <div className="row">
+                <MovieCredits/>
+            </div>
         </>
     )
 }
