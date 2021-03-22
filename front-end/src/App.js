@@ -1,6 +1,6 @@
 import './App.css'
 import React, {useContext, useEffect, useState} from 'react'
-import {Route, BrowserRouter as Router, Switch} from "react-router-dom"
+import {Route, BrowserRouter as Router, HashRouter, Switch} from "react-router-dom"
 import {getUser} from "./authService/getUser";
 import {Context} from "./Store/Store";
 

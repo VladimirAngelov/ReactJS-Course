@@ -2,7 +2,6 @@ import styles from "./Movie.module.css";
 import React from "react";
 
 const BasicInformation = (props) => {
-    console.log(props.countries)
     return (
     <>
         <p className={styles.information}>

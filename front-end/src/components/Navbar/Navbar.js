@@ -15,6 +15,7 @@ const Navbar = () => {
     const handleLogout = () => {
         return logout().then(() => {
             isLoggedOut = true;
+            setSearchInput(false)
             return setUser({username: '', _id: ''})
         }).catch(err => console.log(err))
     }
