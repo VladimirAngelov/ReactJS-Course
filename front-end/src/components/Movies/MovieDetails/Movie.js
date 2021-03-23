@@ -1,4 +1,4 @@
-import React, {useState, useContext, useEffect} from 'react';
+import React, {useState, useContext, useEffect, useRef} from 'react';
 import {Context} from "../../../Store/Store";
 import {Redirect} from 'react-router-dom'
 import styles from './Movie.module.css'
@@ -27,8 +27,8 @@ const Movie = (props) => {
     const [isLarge, setIsLarge] = useState(false)
     const movieId = props.movie.id
 
-    const icon = document.getElementById('play-icon')
-    const image = document.getElementById('details-image')
+    const icon = useRef()
+    const image = useRef()
 
     useEffect(() => {
         return getUserMovies()
@@ -39,13 +39,13 @@ const Movie = (props) => {
     }, [movieId])
 
     const handleOnMouseOver = () => {
-        icon.style.opacity = '1';
-        image.style.opacity = '70%'
+        icon.current.style.opacity = '1';
+        image.current.style.opacity = '70%'
     }
 
     const handleOnMouseOut = () => {
-        image.style.opacity = '100%'
-        return icon.style.opacity = '0.5'
+        image.current.style.opacity = '100%'
+        return icon.current.style.opacity = '0.5'
     }
 
     const handleTrailerClick = (movie) => {
@@ -86,14 +86,17 @@ const Movie = (props) => {
         <>
             <div className="col">
                 <div>
-                    <img onClick={() => handleTrailerClick(props.movie)} id="details-image"
+                    <img onClick={() => handleTrailerClick(props.movie)}
+                         ref={image}
+                         id="details-image"
                          onMouseOver={handleOnMouseOver}
-                         onMouseOut={handleOnMouseOut} className={styles.detailsImage}
+                         onMouseOut={handleOnMouseOut}
+                         className={styles.detailsImage}
                          src={imageUrl + props.movie.poster_path || ''} alt={props.movie.title}/>
                 </div>
                 <span id="play-icon" onClick={() => handleTrailerClick(props.movie)} onMouseOver={handleOnMouseOver}
                       className={styles.playIcon}>
-                    <img src="/play-icon.png" alt=""/>
+                    <img ref={icon} src="/play-icon.png" alt=""/>
                 </span>
             </div>
 
