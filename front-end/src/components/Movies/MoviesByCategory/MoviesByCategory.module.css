@@ -1,14 +1,17 @@
 .categoryMoviePictures {
-    width: 100%;
-    margin: 5px 0 3px 3px;
+    /*width: 100%;*/
+    margin: 3px 0 0 3px;
 }
 
 .categories-container {
     margin-bottom: 20px;
 }
 
-.secondLine {
-    margin-top: 3px;
+.allMovies {
+    /*margin-top: 3px;*/
+    display: flex;
+    flex-wrap: wrap;
+    margin: 3px;
 }
 
 .title {

@@ -30,7 +30,7 @@ const MovieByCategory = (props) => {
         return getMovies(path, counter)
             .then(movies => {
                 setMovies((prevState) => {
-                    return (prevState.concat(movies))
+                    return [...prevState, ...movies]
                 })
                 setIsLoading(false)
             }).catch(err => console.log(err))
@@ -46,7 +46,7 @@ const MovieByCategory = (props) => {
         )
     }
 
-    const firstLine = movies.map(movie =>
+    const allMovies = movies.map(movie =>
         <span className={styles.categoryMoviePictures} key={movie.id}>
                     <Link to={'/movie/details/' + movie.id}>
                         <img className="home-images" src={imageUrl + movie.poster_path} width={126} height={180}
@@ -58,8 +58,8 @@ const MovieByCategory = (props) => {
         <div className={`${styles['categories-container']} row`}>
             <div>
                 <h3 className={styles.title}>{path.toUpperCase()}</h3>
-                <div className={styles.secondLine}>
-                    {firstLine}
+                <div className={styles.allMovies}>
+                    {allMovies}
                     <button id={styles['show-more-movies-button']} onClick={loadMore}>
                         Show More
                     </button>
