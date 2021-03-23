@@ -37,7 +37,6 @@ const Login = () => {
         setPassword(e.target.value)
     }
 
-    // <div> <TvoqKomp /> {err? <errorComp>: null} </div> // error message with
     return (
         <div>
             <div className="authForm">

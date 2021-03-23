@@ -56,8 +56,8 @@ function App() {
                     <Route path="/library" exaxt component={Library}/>
                     <Route component={PageNotFound}/>
                 </Switch>
-            <Footer/>
             </div>
+            <Footer/>
         </HashRouter>
     )
 }
