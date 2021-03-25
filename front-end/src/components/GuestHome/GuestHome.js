@@ -9,7 +9,7 @@ const GuestHome = (props) => {
     return (
         <div>
             <img id={styles["landing-image"]} src="/landing-image.png" alt=""/>
-            <h2 id={styles["landing-h2"]}>Discover new movies, TV shows and <br/>more..</h2>
+            <h2 id={styles["landing-h2"]}>Discover new movies, watch trailers and <br/>more..</h2>
             <h4 id={styles['landing-text']}>Don’t have an account yet? <Link to="/register">Sign Up</Link><br/>
                 or <Link to="/login">Sign In</Link></h4>
             {user.username !== '' && <Redirect to="/home"/>}

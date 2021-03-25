@@ -1,5 +1,5 @@
 import React, {useState, useContext} from 'react'
-import {Redirect} from 'react-router-dom';
+import {Redirect, useHistory} from 'react-router-dom';
 import {Context} from "../../Store/Store";
 
 const Login = () => {
@@ -7,6 +7,7 @@ const Login = () => {
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
     const [user, setUser] = useContext(Context)
+    const history = useHistory()
 
     if (user.username !== '') {
         return <Redirect to="/"/>
@@ -17,13 +18,13 @@ const Login = () => {
 
         return fetch(`/login`, {
             method: 'post',
-            withCredentials: true,
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({username, password})
         }).then(res => res.json())
             .then((response) => {
                 if (response.message) throw new Error(response.message);
                 setUser({_id: response.user._id, username: response.user.username})
+                return history.goBack();
             }).catch(err => {
                 console.log(err)
                 setError(err.message)

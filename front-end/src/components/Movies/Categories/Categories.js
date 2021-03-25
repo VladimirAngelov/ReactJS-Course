@@ -1,11 +1,12 @@
 import React, {useContext} from 'react'
-import {Link, Redirect} from 'react-router-dom';
+import {Link, Redirect, useHistory} from 'react-router-dom';
 import style from './Categories.module.css'
 import {Context} from "../../../Store/Store";
 
 const Categories = () => {
     const [user] = useContext(Context)
-
+    const history = useHistory();
+    console.log(history)
     if (user.username === '') {
         return <Redirect to="/login"/>
     }

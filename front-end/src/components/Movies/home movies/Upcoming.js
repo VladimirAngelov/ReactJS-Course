@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 import {getMovies} from "../../../movie-services/requests";
 const imageUrl = `http://image.tmdb.org/t/p/w400`
 
-export default class Animations extends Component {
+export default class Upcoming extends Component {
     constructor(props) {
         super(props);
 
@@ -13,7 +13,7 @@ export default class Animations extends Component {
     }
 
     componentDidMount() {
-        getMovies('animations')
+        getMovies('upcoming')
             .then((res) => {
                 let data = res.slice(0, 10)
                 this.setState({data: data})
@@ -30,7 +30,7 @@ export default class Animations extends Component {
 
         return (
             <div className="">
-                <Link to="/movies/animations"><h4 className="home-title">Animations<span className="see-more"> See more</span></h4></Link>
+                <Link to="/movies/upcoming"><h4 className="home-title">Upcoming<span className="see-more"> See more</span></h4></Link>
                 <div className="home-movie-pictures">
                     {movieData}
                 </div>

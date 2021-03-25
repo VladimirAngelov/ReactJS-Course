@@ -1,6 +1,6 @@
 import React from 'react';
 import FeaturedMovies from "../Movies/home movies/FeaturedMovies";
-import Animations from "../Movies/home movies/Animations";
+import Upcoming from "../Movies/home movies/Upcoming";
 import TopRated from "../Movies/home movies/TopRated";
 import {Context} from "../../Store/Store";
 import {useContext} from 'react';
@@ -19,10 +19,10 @@ const Home = () => {
                 <FeaturedMovies/>
             </div>
             <div className="row">
-                <TopRated/>
+                <Upcoming/>
             </div>
             <div className="row">
-                <Animations/>
+                <TopRated/>
             </div>
         </div>
     )
