@@ -24,10 +24,10 @@ const BasicInformation = (props) => {
             {props.movie.budget > 0 ? '$' + props.movie.budget : ''}
         </p>
 
-        {/*<p className={styles.information}>*/}
-        {/*    {props.movie?.runtime > 0 ? <span className={styles.titles}>Runtime: </span> : ''}*/}
-        {/*    {props.movie?.runtime > 0 ? props.movie.runtime + 'm.' : ''}*/}
-        {/*</p>*/}
+        <p className={styles.information}>
+            {props.movie?.runtime > 0 ? <span className={styles.titles}>Runtime: </span> : ''}
+            {props.movie?.runtime > 0 ? props.movie.runtime + 'm.' : ''}
+        </p>
 
         {/*<p className={styles.information}>*/}
         {/*    {props.productionCompanies?.length > 0 ?*/}

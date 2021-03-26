@@ -1,16 +1,21 @@
 import React, {useState, useContext} from 'react'
-import {Redirect, useHistory} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import {Context} from "../../Store/Store";
+import styles from "../GuestHome/GuestHome.module.css";
 
-const Login = () => {
+const Login = ({location}) => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
     const [user, setUser] = useContext(Context)
-    const history = useHistory()
+    const previousPath = location.state?.prevPath
 
     if (user.username !== '') {
-        return <Redirect to="/"/>
+        if (previousPath) {
+            return <Redirect to={previousPath}/>
+        } else {
+            return <Redirect to="/"/>
+        }
     }
 
     const handleSubmit = (e) => {
@@ -24,7 +29,6 @@ const Login = () => {
             .then((response) => {
                 if (response.message) throw new Error(response.message);
                 setUser({_id: response.user._id, username: response.user.username})
-                return history.goBack();
             }).catch(err => {
                 console.log(err)
                 setError(err.message)
@@ -54,8 +58,8 @@ const Login = () => {
                     <br/>
 
                     <input id="loginBtn" type="submit"/>
+                    <p className="underAuthButtonText">Don’t have an account yet? <Link to="/register">Sign Up</Link></p>
                     <p className="error-notification">{error}</p>
-
                 </form>
             </div>
         </div>

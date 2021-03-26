@@ -1,5 +1,5 @@
 import React, {useState, useContext} from 'react';
-import {Redirect} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import {Context} from "../../Store/Store";
 
 const Register = () => {
@@ -61,6 +61,7 @@ const Register = () => {
                            name="repeatPassword"/>
 
                     <input id="registerBtn" type="submit"/>
+                    <p className="underAuthButtonText">You have an account? <Link to="/login">Sign In</Link></p>
                     <p className="error-notification">{error}</p>
 
                 </form>

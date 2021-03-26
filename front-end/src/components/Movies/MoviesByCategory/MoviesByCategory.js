@@ -2,7 +2,7 @@ import React, {useState, useEffect, useContext} from 'react'
 import styles from './MoviesByCategory.module.css'
 import {getMovies} from "../../../movie-services/requests";
 import Loader from "../../Loader/Loader";
-import {Link, Redirect} from "react-router-dom";
+import {Link, Redirect, useHistory} from "react-router-dom";
 import {Context} from "../../../Store/Store";
 const imageUrl = `http://image.tmdb.org/t/p/w400`
 
@@ -11,8 +11,10 @@ const MovieByCategory = (props) => {
     const [isLoading, setIsLoading] = useState(true)
     const [counter, setCounter] = useState(1)
     const [user] = useContext(Context)
+    const history = useHistory()
 
     const path = props.match.params.category
+
 
     useEffect(() => {
         setCounter(counter + 1)
@@ -37,7 +39,10 @@ const MovieByCategory = (props) => {
     }
 
     if (user.username === '') {
-        return <Redirect to="/login"/>
+        return <Redirect to={{
+            pathname: '/login',
+            state: {prevPath: history.location.pathname}
+        }}/>
     }
 
     if (isLoading) {

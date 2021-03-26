@@ -34,21 +34,21 @@ const Navbar = () => {
                 <img id={styles.logo} src='/logo.png' alt="the trailers"/>
                 <Link to="/">Home</Link>
                 <Link to="/movies">Movies</Link>
-                {/*<Link to="/movies/tv-shows">TV Shows</Link>*/}
 
                 <div className={styles["right-nav"]}>
-
                     {user?.username !== '' ? <Link to="/library">My Library</Link> : ''}
                     {user?.username !== '' ? <Link onClick={handleLogout} to="">Logout</Link> : ''}
                     {user?.username !== '' ? '' : <Link to="/register">Sign Up</Link>}
                     {user?.username !== '' ? '' : <Link to="/login">Sign In</Link>}
                 </div>
+
                 {user?.username !== '' ?
                     <img onClick={(e) => search ? handleSubmit(e) : setSearchInput(!searchInput)}
                          id={styles["search-icon"]}
                          src="/icons8-search-20.png" alt=""/> : ''}
 
                 {searchInput && <Search {...{search, setSearch, handleSubmit}} />}
+
             </div>
             {isLoggedOut && (<Redirect to="/"/>)}
         </div>

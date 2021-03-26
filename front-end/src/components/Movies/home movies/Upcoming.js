@@ -21,7 +21,6 @@ export default class Upcoming extends Component {
     }
 
     render() {
-
         const movieData = this.state.data.map(movie =>
             <span className="home-movie-pictures" key={movie.id}>
                     <Link to={'/movie/details/' + movie.id}><img  className="home-images" src={imageUrl + movie.poster_path} width={126} height={176} alt={movie.title}/></Link>

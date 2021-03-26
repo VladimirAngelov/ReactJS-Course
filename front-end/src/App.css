@@ -78,6 +78,19 @@ a {
     box-shadow: 2px 2px 2px black;
 }
 
+.underAuthButtonText {
+    margin-top: 5px;
+    color: #ff8c00;
+    text-align: center;
+    text-decoration: none;
+}
+
+.underAuthButtonText a {
+    color: #ff8c00;
+    text-decoration: underline;
+    font-style: italic;
+}
+
 .error-notification {
     background-color: darkred;
     color: white;
