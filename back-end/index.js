@@ -36,6 +36,7 @@ app.get('/getUser', (req, res) => {
 app.post('/register', (req, res) => {
     register(req.body)
         .then(token => {
+<<<<<<< HEAD
             jwt.verify(token, SECRET, (err, user) => {
                 if (err) {
                     res.clearCookie(COOKIE_NAME);
@@ -43,6 +44,15 @@ app.post('/register', (req, res) => {
                     res.status(200).cookie(COOKIE_NAME, token, {secure: true, httpOnly: true}).json({user, token})
                 }
             })
+=======
+                jwt.verify(token, SECRET, (err, user) => {
+                    if (err) {
+                        res.clearCookie(COOKIE_NAME);
+                    } else {
+                        res.status(200).cookie(COOKIE_NAME, token, {secure: true, httpOnly: true}).json({user, token})
+                    }
+                })
+>>>>>>> 747d146d3778e4233c5ca9fc20747d006bc2fe2c
         }).catch((error) => res.json(error))
 });
 
