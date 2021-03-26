@@ -5,23 +5,25 @@ const {register, login} = require('./services/authService');
 const {addMovieToLibrary, getUsersMovies, removeFromLibrary} = require('./services/movieService')
 const authenticated = require('./middlewares/auth')
 const isAuth = require('./middlewares/isAuth')
-
+const cors = require('cors')
 const jwt = require('jsonwebtoken');
 const {SECRET, COOKIE_NAME} = require('./config/config');
 const cookieParser = require('cookie-parser');
 
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'http://localhost:5000');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    next();
-});
+const path = require('path')
+app.use(express.static('build'))
 
+app.use(cors({credentials: true}))
 app.use(cookieParser());
 app.use(express.urlencoded({extended: true}))
 app.use(express.json());
 app.use(authenticated())
 
-app.get('/getUser', isAuth, (req, res) => {
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'))
+})
+
+app.get('/getUser', (req, res) => {
     const user = req.user
 
     if (user) {
@@ -34,32 +36,26 @@ app.get('/getUser', isAuth, (req, res) => {
 app.post('/register', (req, res) => {
     register(req.body)
         .then(token => {
-            res.cookie(COOKIE_NAME, token, {httpOnly: true});
-
-            jwt.verify(token, SECRET, (err, decoded) => {
-                if (err) {
-                    res.clearCookie(COOKIE_NAME);
-                } else {
-                    res.status(200).json(decoded)
-                }
-            })
-
+                jwt.verify(token, SECRET, (err, user) => {
+                    if (err) {
+                        res.clearCookie(COOKIE_NAME);
+                    } else {
+                        res.status(200).cookie(COOKIE_NAME, token, {secure: true, httpOnly: true}).json({user, token})
+                    }
+                })
         }).catch((error) => res.json(error))
 });
 
 app.post('/login', (req, res) => {
     login(req.body)
         .then(token => {
-            res.cookie(COOKIE_NAME, token, {httpOnly: true});
-
-            jwt.verify(token, SECRET, (err, decoded) => {
+            jwt.verify(token, SECRET, (err, user) => {
                 if (err) {
                     res.clearCookie(COOKIE_NAME);
                 } else {
-                    res.status(200).json(decoded)
+                    res.status(200).cookie(COOKIE_NAME, token, {sameSite: 'none', secure: true}).json({user, token})
                 }
             })
-
         }).catch((error) => res.json(error))
 });
 
@@ -68,9 +64,13 @@ app.get('/logout', (req, res) => {
     res.status(200).json({message: 'successfully'})
 });
 
-app.post('/addMovieToLibrary', (req, res) => {
+app.post('/addMovieToLibrary', isAuth, (req, res) => {
     addMovieToLibrary(req.body)
         .then(() => res.status(200).json({message: 'Successfully added to library'}))
+        .catch(err => {
+            console.log(err)
+            return res.json({message: 'Something went wrong'})
+        })
 })
 
 app.get('/getUserMovies', isAuth, (req, res) => {
@@ -79,13 +79,17 @@ app.get('/getUserMovies', isAuth, (req, res) => {
     if (user) {
         getUsersMovies(user._id)
             .then(movies => res.status(200).json(movies))
+            .catch(err => {
+                console.log(err)
+                return res.json({message: 'Something went wrong'})
+            })
     } else {
         res.clearCookie(COOKIE_NAME)
     }
 
 })
 
-app.delete('/removeFromLibrary/:movieId/:userId', (req, res) => {
+app.delete('/removeFromLibrary/:movieId/:userId', isAuth, (req, res) => {
     const movieId = req.params.movieId
     const userId = req.params.userId
 
@@ -93,7 +97,7 @@ app.delete('/removeFromLibrary/:movieId/:userId', (req, res) => {
         .then(() => res.status(200).json({message: 'Successfully removed from library'}))
         .catch(err => {
             console.log(err)
-            return res.status(200).json({message: 'Something went wrong'})
+            return res.json({message: 'Something went wrong'})
         })
 })
 
