@@ -31,7 +31,6 @@ function App() {
             setUser({_id: currentUser._id, username: currentUser.username})
             setIsLoading(false)
         }).catch(err => console.log(err))
-
     }, [setUser])
 
     if (isLoading) {
