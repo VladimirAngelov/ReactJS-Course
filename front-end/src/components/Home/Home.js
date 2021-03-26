@@ -15,6 +15,7 @@ const Home = () => {
 
     return (
         <div>
+            {/*<div style={{background: '#00ff00'}}>Logged in Successfully</div>*/}
             <div className="row">
                 <FeaturedMovies/>
             </div>

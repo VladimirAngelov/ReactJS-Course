@@ -6,8 +6,14 @@ const Register = () => {
     const [user, setUser] = useContext(Context)
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const [error, setError] = useState('')
+    const [error, setError] = useState(false)
     const [repeatPassword, setRepeatPassword] = useState('')
+
+    if (error) {
+        setTimeout(() => {
+            setError(false)
+        }, 2000)
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();

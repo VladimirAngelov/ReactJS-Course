@@ -6,9 +6,15 @@ import styles from "../GuestHome/GuestHome.module.css";
 const Login = ({location}) => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const [error, setError] = useState('')
+    const [error, setError] = useState(false)
     const [user, setUser] = useContext(Context)
     const previousPath = location.state?.prevPath
+
+    if (error) {
+        setTimeout(() => {
+            setError(false)
+        }, 2000)
+    }
 
     if (user.username !== '') {
         if (previousPath) {
