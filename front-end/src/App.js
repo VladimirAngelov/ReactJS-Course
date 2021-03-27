@@ -15,6 +15,7 @@ import Loader from './components/Loader/Loader'
 import Categories from './components/Movies/Categories/Categories'
 import MoviesByCategory from './components/Movies/MoviesByCategory/MoviesByCategory'
 import Details from './components/Movies/MovieDetails/Details'
+import Actor from "./components/Actor/Actor";
 import PageNotFound from "./components/404/PageNotFound";
 import SearchResults from './components/Movies/Search/SearchResults'
 
@@ -53,6 +54,7 @@ function App() {
                     <Route path="/movies/:category" exact component={MoviesByCategory}/>
                     <Route path="/results/:search" exaxt component={SearchResults}/>
                     <Route path="/library" exaxt component={Library}/>
+                    <Route path="/actor/:actorId" exact component={Actor}/>
                     <Route component={PageNotFound}/>
                 </Switch>
             </div>

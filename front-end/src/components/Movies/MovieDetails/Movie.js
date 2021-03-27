@@ -17,7 +17,7 @@ const options = {
         autoplay: 1,
     }
 }
-const imageUrl = `http://image.tmdb.org/t/p/w400/`
+const imageUrl = `http://image.tmdb.org/t/p/w400`
 
 const Movie = (props) => {
     const [user] = useContext(Context)
@@ -84,49 +84,53 @@ const Movie = (props) => {
 
     return (
         <>
-            <div className="col">
-                <div>
-                    <img onClick={() => handleTrailerClick(props.movie)}
-                         ref={image}
-                         id="details-image"
-                         onMouseOver={handleOnMouseOver}
-                         onMouseOut={handleOnMouseOut}
-                         className={styles.detailsImage}
-                         src={imageUrl + props.movie.poster_path || ''} alt={props.movie.title}/>
-                </div>
-                <span id="play-icon" onClick={() => handleTrailerClick(props.movie)} onMouseOver={handleOnMouseOver}
-                      className={styles.playIcon}>
+            <div className="row">
+                <div className="col">
+                    <div>
+                        <img onClick={() => handleTrailerClick(props.movie)}
+                             ref={image}
+                             id="details-image"
+                             onMouseOver={handleOnMouseOver}
+                             onMouseOut={handleOnMouseOut}
+                             className={styles.detailsImage}
+                             src={imageUrl + props.movie.poster_path || ''} alt={props.movie.title}/>
+                    </div>
+                    <span id="play-icon" onClick={() => handleTrailerClick(props.movie)} onMouseOver={handleOnMouseOver}
+                          className={styles.playIcon}>
                     <img ref={icon} src="/play-icon.png" alt=""/>
                 </span>
-            </div>
-
-            <div className="col information">
-                <h2 id={styles.title} className={styles.information}>{props.movie.title || props.movie.name}</h2>
-                <h4 id={styles.tagline}>{props.movie.tagline?.length > 1 ? `"${props.movie.tagline}"` : ''}</h4>
-
-                <p id={styles.description}>
-                    <span className={styles.titles}>Overview: </span>
-                    {props.movie.overview}
-                </p>
-
-                {!isLarge && <BasicInformation movie={props.movie} genres={props.genres} countries={props.countries}
-                                               productionCompanies={props.productionCompanies}/>}
-
-                {isInLibrary
-                    ? <button id={styles.libraryButton} onClick={handleRemoveFromLibrary}>Remove from
-                        Library</button>
-                    : <button id={styles.libraryButton} onClick={handleLibraryClick}>Add to Library</button>}
-            </div>
-
-            <div className={`${styles.video} col`}>
-                <div className="video-player">
-                    {error && <p className="error-notification">{error}</p>}
-                    {trailerUrl && <YouTube videoId={trailerUrl} opt={options}/>}
-                    {isLarge && <BasicInformation movie={props.movie} genres={props.genres} countries={props.countries}
-                                                  productionCompanies={props.productionCompanies}/>}
                 </div>
+
+                <div className="col information">
+                    <h2 id={styles.title} className={styles.information}>{props.movie.title || props.movie.name}</h2>
+                    <h4 id={styles.tagline}>{props.movie.tagline?.length > 1 ? `"${props.movie.tagline}"` : ''}</h4>
+
+                    <p id={styles.description}>
+                        <span className={styles.titles}>Overview: </span>
+                        {props.movie.overview}
+                    </p>
+
+                    {!isLarge && <BasicInformation movie={props.movie} genres={props.genres} countries={props.countries}
+                                                   productionCompanies={props.productionCompanies}/>}
+
+                    {isInLibrary
+                        ? <button id={styles.libraryButton} onClick={handleRemoveFromLibrary}>Remove from
+                            Library</button>
+                        : <button id={styles.libraryButton} onClick={handleLibraryClick}>Add to Library</button>}
+                </div>
+
+                <div className={`${styles.video} col`}>
+                    <div className="video-player">
+                        {error && <p className="error-notification">{error}</p>}
+                        {trailerUrl && <YouTube videoId={trailerUrl} opt={options}/>}
+                        {isLarge &&
+                        <BasicInformation movie={props.movie} genres={props.genres} countries={props.countries}
+                                          productionCompanies={props.productionCompanies}/>}
+                    </div>
+                </div>
+                {user.username === '' && <Redirect to="/login"/>}
             </div>
-            {user.username === '' && <Redirect to="/login"/>}
+
             <div className="row">
                 <MovieCredits movieId={props.movie.id}/>
             </div>
