@@ -1,4 +1,4 @@
-import {Biography, Titles} from "./StyledComponents";
+import {Biography, Titles} from "./StyledActor";
 
 const ActorInformation = ({actor}) => {
     return (

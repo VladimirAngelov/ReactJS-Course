@@ -15,6 +15,12 @@
     cursor: pointer;
 }
 
+.detailsImage {
+    max-width: 400px;
+    height: 600px;
+    box-shadow: 0 15px 15px #1B1B1B;
+}
+
 .detailsImage:hover{
     opacity: 70%;
     cursor: pointer;

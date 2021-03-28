@@ -1,7 +1,6 @@
 import React, {useState, useContext} from 'react'
 import {Link, Redirect} from 'react-router-dom';
 import {Context} from "../../Store/Store";
-import styles from "../GuestHome/GuestHome.module.css";
 
 const Login = ({location}) => {
     const [username, setUsername] = useState('')

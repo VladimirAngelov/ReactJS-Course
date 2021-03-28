@@ -1,4 +1,11 @@
-import styled, {css} from 'styled-components'
+import styled from 'styled-components'
+
+export const Image = styled.img`
+  width: 300px;
+  height: 450px;
+  border-radius: 10px;
+  box-shadow: 0 15px 15px #1B1B1B;
+`
 
 export const Title = styled.h1`
   color: white;

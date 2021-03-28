@@ -93,7 +93,7 @@ const Movie = (props) => {
                              onMouseOver={handleOnMouseOver}
                              onMouseOut={handleOnMouseOut}
                              className={styles.detailsImage}
-                             src={imageUrl + props.movie.poster_path || ''} alt={props.movie.title}/>
+                             src={props.movie.poster_path !== null ? `${imageUrl}${props.movie.poster_path}` : `/notfound.png`} alt={props.movie.title}/>
                     </div>
                     <span id="play-icon" onClick={() => handleTrailerClick(props.movie)} onMouseOver={handleOnMouseOver}
                           className={styles.playIcon}>

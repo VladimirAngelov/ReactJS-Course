@@ -9,7 +9,6 @@ const MovieCredits = (props) => {
     const [credits, setCredits] = useState([])
     const [fullCast, setFullCast] = useState(false);
 
-    console.log(credits)
     const movieId = props?.movieId
 
     useEffect(() => {

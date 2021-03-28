@@ -49,3 +49,8 @@ export const getActorInfo = (actorId) => {
     return fetch(`${baseURL}person/${actorId}?api_key=${API_KEY}`)
         .then(res => res.json())
 }
+// https://api.themoviedb.org/3/person/${ACTOR ID}/movie_credits?api_key=16532dc7c21d82cfd12dc3f9cda7aaa8
+export const getActorsMovies = (actorId) => {
+    return fetch(`${baseURL}person/${actorId}/movie_credits?api_key=${API_KEY}`)
+        .then(res => res.json())
+}
