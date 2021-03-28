@@ -1,20 +1,31 @@
-import {useState, useEffect} from "react";
+import React, {useState, useEffect, useContext} from "react";
 import {getActorInfo} from "../../movie-services/requests";
 import {Title, Titles, Biography, ReadMore, Image} from "./StyledActor";
 import ActorInformation from "./ActorInformation";
 import KnownFor from "./KnownFor";
 import {Col, Row} from 'react-bootstrap'
+import {Redirect, useHistory} from "react-router-dom";
+import {Context} from "../../Store/Store";
 
 const Actor = ({match}) => {
     const actorId = match.params.actorId
+    const [user] = useContext(Context)
     const [actor, setActor] = useState({})
     const [fullBio, setFullBio] = useState(false)
     const imageUrl = `http://image.tmdb.org/t/p/w400`
+    const history = useHistory()
 
     useEffect(() => {
         getActorInfo(actorId)
             .then(data => setActor(data))
     }, [actorId])
+
+    if (user.username === '') {
+        return <Redirect to={{
+            pathname: '/login',
+            state: {prevPath: history.location.pathname}
+        }}/>
+    }
 
     const smallBiography = actor.biography?.substr(0, 1000)
 
