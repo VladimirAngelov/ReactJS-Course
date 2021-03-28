@@ -5,7 +5,7 @@ import TopRated from "../Movies/home movies/TopRated";
 import {Context} from "../../Store/Store";
 import {useContext} from 'react';
 import {Redirect} from "react-router-dom";
-
+import {Row} from 'react-bootstrap'
 const Home = () => {
     const [user] = useContext(Context)
 
@@ -14,18 +14,17 @@ const Home = () => {
     }
 
     return (
-        <div>
-            {/*<div style={{background: '#00ff00'}}>Logged in Successfully</div>*/}
-            <div className="row">
+        <>
+            <Row className="row">
                 <FeaturedMovies/>
-            </div>
-            <div className="row">
+            </Row>
+            <Row className="row">
                 <Upcoming/>
-            </div>
-            <div className="row">
+            </Row>
+            <Row className="row">
                 <TopRated/>
-            </div>
-        </div>
+            </Row>
+        </>
     )
 }
 

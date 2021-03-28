@@ -3,6 +3,7 @@ import {getActorInfo} from "../../movie-services/requests";
 import {Title, Titles, Biography, ReadMore, Image} from "./StyledActor";
 import ActorInformation from "./ActorInformation";
 import KnownFor from "./KnownFor";
+import {Col, Row} from 'react-bootstrap'
 
 const Actor = ({match}) => {
     const actorId = match.params.actorId
@@ -16,23 +17,23 @@ const Actor = ({match}) => {
     }, [actorId])
 
     const smallBiography = actor.biography?.substr(0, 1000)
-    console.log(actor)
+
     return (
-        <div className="row">
-            <div className="col-3">
+        <Row>
+            <Col md={3}>
             <span>
                 <Image src={actor.profile_path !== null ? `${imageUrl}${actor.profile_path}` : `/profile-picture.png`}/>
             </span>
                 {
-                    (actor.biography?.length > 1000 && fullBio) && <ActorInformation actor={actor}/>
+                    (actor.biography?.length > 1000 && fullBio) && <div style={{marginTop: 10}}><ActorInformation actor={actor}/></div>
                 }
-            </div>
-            <div className="col-9">
+            </Col>
+            <Col md={9}>
                 <Title>{actor.name}</Title>
                 {actor.biography && <Titles>Biography: </Titles>}
                 {actor.biography && <Biography>
                     {fullBio && actor.biography}
-                    {!fullBio && `${smallBiography}`}
+                    {!fullBio && `${smallBiography} ${actor.biography?.length > 1000 ? '...' : ''}`}
                     {
                         actor.biography?.length > 1000 &&
                         <ReadMore onClick={() => setFullBio(!fullBio)}>
@@ -47,9 +48,8 @@ const Actor = ({match}) => {
                     }
                 </div>
                 <KnownFor actorId={actorId}/>
-            </div>
-
-        </div>
+            </Col>
+        </Row>
     )
 }
 

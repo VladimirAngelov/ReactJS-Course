@@ -27,12 +27,12 @@ export default class TopRated extends Component {
             </span>
         )
         return (
-            <div className="">
+            <>
                 <Link to="/movies/top-rated"><h4 className="home-title">Top Rated<span className="see-more"> See more</span></h4></Link>
                 <div className="home-movie-pictures">
                     {movieData}
                 </div>
-            </div>
+            </>
         )
     }
 }

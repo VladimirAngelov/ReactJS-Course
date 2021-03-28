@@ -28,12 +28,12 @@ export default class Upcoming extends Component {
         )
 
         return (
-            <div className="">
+            <>
                 <Link to="/movies/upcoming"><h4 className="home-title">Upcoming<span className="see-more"> See more</span></h4></Link>
                 <div className="home-movie-pictures">
                     {movieData}
                 </div>
-            </div>
+            </>
         )
     }
 }

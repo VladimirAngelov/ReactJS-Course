@@ -4,6 +4,7 @@ import {Route, HashRouter, Switch} from "react-router-dom"
 import {getUser} from "./authService/getUser";
 import {Context} from "./Store/Store";
 
+import {Container} from 'react-bootstrap'
 import Navbar from "./components/Navbar/Navbar";
 import GuestHome from "./components/GuestHome/GuestHome"
 import Footer from './components/Footer'
@@ -42,7 +43,7 @@ function App() {
 
     return (
         <HashRouter>
-            <div className="container">
+            <Container>
                 <Navbar/>
                 <Switch>
                     <Route path="/" exact component={isLoggedIn ? Home : GuestHome}/>
@@ -57,7 +58,7 @@ function App() {
                     <Route path="/actor/:actorId" exact component={Actor}/>
                     <Route component={PageNotFound}/>
                 </Switch>
-            </div>
+            </Container>
             <Footer/>
         </HashRouter>
     )

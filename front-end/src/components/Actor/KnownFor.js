@@ -3,6 +3,7 @@ import {getActorsMovies} from "../../movie-services/requests";
 import {KnownForCard, Image, MovieTitle, Title} from "./StyledKnowFor";
 import {Link} from 'react-router-dom'
 import ActorCrew from "./ActorCrew";
+import {Row} from 'react-bootstrap'
 
 const imageUrl = `http://image.tmdb.org/t/p/w400`
 
@@ -10,7 +11,7 @@ const KnownFor = ({actorId}) => {
     const [actorMovies, setActorMovies] = useState([]);
     const [actorCrew, setActorCrew] = useState([]);
 
-    console.log(actorCrew)
+    const filteredCrew = actorCrew.filter(c => c.release_date)
 
     useEffect(() => {
         getActorsMovies(actorId)
@@ -20,7 +21,7 @@ const KnownFor = ({actorId}) => {
             })
     }, [actorId])
 
-    const knownForMovies = actorMovies.slice(0, 6).map(m => (
+    const knownForMovies = actorMovies?.slice(0, 6).map(m => (
         <KnownForCard key={m.id}>
             <Link to={`/movie/details/${m.id}`}>
                 <Image src={m.poster_path !== null ? `${imageUrl}${m.poster_path}` : `/notfound.png`}/>
@@ -31,10 +32,13 @@ const KnownFor = ({actorId}) => {
     return (
         <>
             <Title>Known For</Title>
-            <div className="row">
+            <Row>
                 {knownForMovies}
-            </div>
-            <ActorCrew actorCrew={actorCrew}/>
+            </Row>
+
+            <Row>
+                {filteredCrew?.length > 0 && <ActorCrew actorCrew={filteredCrew}/>}
+            </Row>
         </>
     )
 }

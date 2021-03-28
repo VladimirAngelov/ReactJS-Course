@@ -34,7 +34,7 @@ export default class FeaturedMovies extends Component {
             </span>
         )
         return (
-            <div className="">
+            <>
 
                 <Link to="/movies/featured"><h4 className="home-title">Featured<span
                     className="see-more"> See more</span></h4></Link>
@@ -42,7 +42,7 @@ export default class FeaturedMovies extends Component {
                 <div className="home-movie-pictures">
                     {movieData}
                 </div>
-            </div>
+            </>
         )
     }
 }

@@ -3,6 +3,7 @@ import {getOneMovie,} from "../../../movie-services/requests";
 import Movie from './Movie'
 import {Redirect, useHistory} from "react-router-dom";
 import {Context} from "../../../Store/Store";
+import {Row} from 'react-bootstrap'
 
 const Details = (props) => {
     const [movie, setMovie] = useState({})
@@ -30,9 +31,9 @@ const Details = (props) => {
     const productionCompanies = movie.production_companies?.map(c => c.name).join(', ')
 
     return (
-        <div className="row">
+        <Row>
             <Movie movie={movie} genres={genres} countries={countries} productionCompanies={productionCompanies}/>
-        </div>
+        </Row>
     )
 }
 

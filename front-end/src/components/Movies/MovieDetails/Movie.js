@@ -8,6 +8,7 @@ import getUserMovies from "../../../authService/getUserMovies";
 import removeFromLibrary from "../../../authService/removeFromLibrary";
 import BasicInformation from "./BasicInformation";
 import MovieCredits from "./MovieCredits";
+import {Col, Row} from 'react-bootstrap'
 
 const options = {
     height: '200',
@@ -84,8 +85,8 @@ const Movie = (props) => {
 
     return (
         <>
-            <div className="row">
-                <div className="col">
+            <Row>
+                <Col sm={12} md={4}>
                     <div>
                         <img onClick={() => handleTrailerClick(props.movie)}
                              ref={image}
@@ -93,15 +94,16 @@ const Movie = (props) => {
                              onMouseOver={handleOnMouseOver}
                              onMouseOut={handleOnMouseOut}
                              className={styles.detailsImage}
-                             src={props.movie.poster_path !== null ? `${imageUrl}${props.movie.poster_path}` : `/notfound.png`} alt={props.movie.title}/>
+                             src={props.movie.poster_path !== null ? `${imageUrl}${props.movie.poster_path}` : `/notfound.png`}
+                             alt={props.movie.title}/>
                     </div>
                     <span id="play-icon" onClick={() => handleTrailerClick(props.movie)} onMouseOver={handleOnMouseOver}
                           className={styles.playIcon}>
-                    <img ref={icon} src="/play-icon.png" alt=""/>
-                </span>
-                </div>
+                        <img ref={icon} src="/play-icon.png" alt=""/>
+                    </span>
+                </Col>
 
-                <div className="col information">
+                <Col sm={12} md={trailerUrl !== '' ? 2 : 4}>
                     <h2 id={styles.title} className={styles.information}>{props.movie.title || props.movie.name}</h2>
                     <h4 id={styles.tagline}>{props.movie.tagline?.length > 1 ? `"${props.movie.tagline}"` : ''}</h4>
 
@@ -117,23 +119,23 @@ const Movie = (props) => {
                         ? <button id={styles.libraryButton} onClick={handleRemoveFromLibrary}>Remove from
                             Library</button>
                         : <button id={styles.libraryButton} onClick={handleLibraryClick}>Add to Library</button>}
-                </div>
+                </Col>
 
-                <div className={`${styles.video} col`}>
-                    <div className="video-player">
+                <Col sm={12} md={6} className={`${styles.video}`}>
+                    <div>
                         {error && <p className="error-notification">{error}</p>}
                         {trailerUrl && <YouTube videoId={trailerUrl} opt={options}/>}
                         {isLarge &&
                         <BasicInformation movie={props.movie} genres={props.genres} countries={props.countries}
                                           productionCompanies={props.productionCompanies}/>}
                     </div>
-                </div>
+                </Col>
                 {user.username === '' && <Redirect to="/login"/>}
-            </div>
+            </Row>
 
-            <div className="row">
+            <Row className={styles.cast}>
                 <MovieCredits movieId={props.movie.id}/>
-            </div>
+            </Row>
         </>
     )
 }

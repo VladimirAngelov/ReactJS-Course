@@ -4,6 +4,7 @@ import {getMovies} from "../../../movie-services/requests";
 import Loader from "../../Loader/Loader";
 import {Link, Redirect, useHistory} from "react-router-dom";
 import {Context} from "../../../Store/Store";
+import {Row} from 'react-bootstrap'
 const imageUrl = `http://image.tmdb.org/t/p/w400`
 
 const MovieByCategory = (props) => {
@@ -60,7 +61,7 @@ const MovieByCategory = (props) => {
             </span>)
 
     return (
-        <div className={`${styles['categories-container']} row`}>
+        <Row className={`${styles['categories-container']}`}>
             <div>
                 <h3 className={styles.title}>{path.toUpperCase()}</h3>
                 <div className={styles.allMovies}>
@@ -70,7 +71,7 @@ const MovieByCategory = (props) => {
                     </button>
                 </div>
             </div>
-        </div>
+        </Row>
     )
 }
 

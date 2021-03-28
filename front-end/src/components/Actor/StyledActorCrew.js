@@ -1,23 +1,15 @@
 import styled from 'styled-components'
 
-// <table>
-    // <tbody>
-        // <tr>
-            // <td>Something</td>
-            // <td>Something</td>
-        // </tr>
-    // </tbody>
-// </table>
-
 export const Title = styled.h3`
   color: white;
 `
 
 export const Table = styled.table`
-  margin-top: 20px;
+  margin-top: 10px;
+  margin-left: 10px;
   background: transparent;
-  border: 1px solid #ababab;
-  width: 80%;
+  //border: 1px solid #ababab;
+  width: 95%;
 `
 
 export const Th = styled.th`

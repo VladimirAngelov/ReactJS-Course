@@ -2,6 +2,7 @@ import React, {useContext} from 'react'
 import {Link, Redirect, useHistory} from 'react-router-dom';
 import style from './Categories.module.css'
 import {Context} from "../../../Store/Store";
+import {Row, Col} from 'react-bootstrap';
 
 const Categories = () => {
     const [user] = useContext(Context)
@@ -15,9 +16,9 @@ const Categories = () => {
     }
 
     return (
-        <div>
+        <>
             <h2 className={style.title}>Categories</h2>
-            <div className="row">
+            <Row>
                 <div className={style.categoriesImages}>
                     <Link to="/movies/action" className={style.categoryBox}>
                         <img src="/action.jpg" width={254} height={350} alt="action"/>
@@ -36,8 +37,8 @@ const Categories = () => {
                     </Link>
                     {user.username === '' && <Redirect to="/login"/>}
                 </div>
-            </div>
-            <div className="row">
+            </Row>
+            <Row>
                 <div className={style.categoriesImages}>
                     <Link to="/movies/fantasy" className={style.categoryBox}>
                         <img src="/fantasy.jpg" width={254} height={350} alt="fantasy"/>
@@ -55,8 +56,8 @@ const Categories = () => {
                         <img src="/crime.jpg" width={254} height={350} alt="crime"/>
                     </Link>
                 </div>
-            </div>
-        </div>
+            </Row>
+        </>
 
     )
 }

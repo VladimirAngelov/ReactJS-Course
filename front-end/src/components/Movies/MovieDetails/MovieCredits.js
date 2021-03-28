@@ -18,16 +18,18 @@ const MovieCredits = (props) => {
             })
     }, [movieId])
 
-    const movieFullCast = credits?.map(c =>
+    const movieFullCast = credits?.map(c => (
         <div key={c.id} style={{maxWidth: 162, textAlign: 'center'}}>
-                <Link to={`/actor/${c.id}`}><img className={styles['cast-pictures']}
+            <Link to={`/actor/${c.id}`}>
+                <img className={styles['cast-pictures']}
                      src={c.profile_path !== null ? `${imageUrl + c.profile_path}` : `/profile-picture.png`} width={126}
                      height={180}
-                     alt={c.name}/></Link>
+                     alt={c.name}/>
+            </Link>
             <p className={styles['actor-name']}><strong>{c.name}</strong></p>
             <p className={styles['character-name']}>{c.character}</p>
         </div>
-    )
+    ))
 
     const moviePartCast = movieFullCast?.slice(0, 8)
 
@@ -37,7 +39,7 @@ const MovieCredits = (props) => {
             {!fullCast && moviePartCast}
             {fullCast && movieFullCast}
 
-            <button id={styles['show-cast-button']} onClick={() => setFullCast(!fullCast)} >
+            <button id={styles['show-cast-button']} onClick={() => setFullCast(!fullCast)}>
                 {fullCast ? 'Hide full cast' : 'Show full cast'}
             </button>
         </>

@@ -19,6 +19,7 @@
     max-width: 400px;
     height: 600px;
     box-shadow: 0 15px 15px #1B1B1B;
+    width: 100%;
 }
 
 .detailsImage:hover{
@@ -55,5 +56,10 @@
 }
 
 .video {
+    width: 100%;
     max-width: 50%;
+}
+
+.cast {
+    margin-top: 20px;
 }
