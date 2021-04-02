@@ -8,4 +8,4 @@ The app allows users to:
 * Read about actors movies and biography
 
 ## Tech stack:
-<img src="https://www.digifutura.com/wp-content/uploads/2019/10/mern-stack-development-img.png" style="width: 100%; margin-top: -110px" alt="Mern-Stack"/>
+<img src="https://agileengine.com/wp-content/uploads/2018/02/mern.jpg" style="width: 100%;" alt="Mern-Stack"/>
