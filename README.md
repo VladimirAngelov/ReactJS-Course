@@ -1,4 +1,4 @@
-# React Course - March 2021
+# ReactJS Course - March 2021
 
 # The Trailers - live demo: [thetrailers.herokuapp.com](https://thetrailers.herokuapp.com)
 The app allows users to: 
