@@ -108,6 +108,13 @@ footer {
     color: #ff8c00;
     text-align: center;
     margin-top: 30px;
-    /*bottom: 0;*/
 }
 
+#basic-nav-dropdown::after{
+    display: none;
+}
+
+.dropdown-menu {
+    background: #212429;
+    box-shadow: 0 15px 15px #1B1B1B;
+}

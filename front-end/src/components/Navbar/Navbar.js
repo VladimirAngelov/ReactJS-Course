@@ -4,12 +4,13 @@ import {Context} from "../../Store/Store";
 import {logout} from "../../authService/Logout";
 import Search from "../Movies/Search/Search";
 import styles from './Navbar.module.css'
-import {Col, Row} from 'react-bootstrap'
+import {Col, Row, NavDropdown} from 'react-bootstrap'
 
 const Navbar = () => {
     const [user, setUser] = useContext(Context)
     const [searchInput, setSearchInput] = useState(false)
     const [search, setSearch] = useState('')
+    const screenWidth = window.screen.width
     let isLoggedOut = false;
     const history = useHistory()
 
@@ -33,18 +34,40 @@ const Navbar = () => {
         <Row>
             <Col sm={6} md={6} className={`${styles["top-navbar"]}`}>
                 <Col sm={12}>
-                    <img id={styles.logo} src='/logo.png' alt="the trailers"/>
+                    <Link to="/"><img id={styles.logo} src='/logo.png' alt="the trailers"/></Link>
                 </Col>
 
-                <Col sm={6}>
+                {screenWidth >= 1400 && <Col sm={6}>
                     <Link to="/">Home</Link>
                     <Link to="/movies">Movies</Link>
-                </Col>
+                </Col>}
             </Col>
 
-            <Col sm={6} md={6}>
-                <Col className={styles["right-nav"]}>
+            <Col sm={6} md={6} className={styles["right-nav"]}>
 
+                {
+                    screenWidth <= 1400 &&
+                    <>
+
+
+                    <NavDropdown title={<img width={40} height={30} src="./icons8-menu-30.png"/>}
+                                                        id="basic-nav-dropdown">
+                        <NavDropdown.Item to="/movies">Movies</NavDropdown.Item>
+                        {user?.username !== '' && <Link className={styles.dropLink} to="/library">My Library</Link>}
+                        {user?.username !== '' && <NavDropdown.Item href="/logout">Logout</NavDropdown.Item>}
+                        {user?.username === '' && <NavDropdown.Item href="/register">Sign Up</NavDropdown.Item>}
+                        {user?.username === '' && <NavDropdown.Item href="/login">Sign In</NavDropdown.Item>}
+                        {/*<NavDropdown.Divider/>*/}
+                        {/*<NavDropdown.Item onClick={(e) => search ? handleSubmit(e) : setSearchInput(!searchInput)}>*/}
+                        {/*    Search</NavDropdown.Item>*/}
+                    </NavDropdown>
+                        {searchInput && <Search {...{search, setSearch, handleSubmit}} />}
+                    </>
+
+                }
+
+                {screenWidth >= 1400 &&
+                <>
                     {user?.username !== '' ? <Link onClick={handleLogout} to="">Logout</Link> : ''}
                     {user?.username !== '' ? <Link to="/library">My Library</Link> : ''}
                     {user?.username !== '' ? '' : <Link to="/login">Sign In</Link>}
@@ -55,7 +78,10 @@ const Navbar = () => {
                              src="/icons8-search-20.png" alt=""/> : ''}
 
                     {searchInput && <Search {...{search, setSearch, handleSubmit}} />}
-                </Col>
+                </>
+                }
+
+
             </Col>
             {isLoggedOut && (<Redirect to="/"/>)}
         </Row>

@@ -30,7 +30,9 @@ export default class FeaturedMovies extends Component {
 
         const movieData = this.state.data.map(movie =>
             <span className="home-movie-pictures" key={movie.id}>
-                <Link to={'/movie/details/' + movie.id}><img className="home-images" src={imageUrl + movie.poster_path} width={126} height={176} alt={movie.title}/></Link>
+                <Link to={'/movie/details/' + movie.id}>
+                    <img className="home-images" src={movie.poster_path !== null ? `${imageUrl}${movie.poster_path}` : `/notfound.png`} width={126} height={176} alt={movie.title}/>
+                </Link>
             </span>
         )
         return (

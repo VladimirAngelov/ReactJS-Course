@@ -27,7 +27,8 @@
 
 #logo {
     float: left;
-    padding: 8px;
+    margin-top: -8px;
+    /*padding: 8px;*/
 }
 
 #search-icon {
@@ -38,4 +39,8 @@
 
 #search-icon:hover {
     opacity: 0.5;
+}
+
+.dropLink {
+    margin-left: -20px;
 }

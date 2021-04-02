@@ -8,6 +8,7 @@
     margin-right: 10px;
     animation-duration: 2s;
     animation-name: show;
+    width: 100px;
 }
 
 #search-field::placeholder {

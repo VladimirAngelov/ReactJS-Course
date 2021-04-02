@@ -3,7 +3,7 @@ const baseURL = `https://api.themoviedb.org/3/`
 
 const requests = {
     featured: `discover/movie?api_key=${API_KEY}&sort_by=popularity.desc`,
-    upcoming: `movie/upcoming?api_key=${API_KEY}`,
+    upcoming: `movie/upcoming?api_key=${API_KEY}&region=CA|US`,
     fantasy: `discover/movie?api_key=${API_KEY}&with_genres=14`,
     adventure: `discover/movie?api_key=${API_KEY}&with_genres=12`,
     thriller: `discover/movie?api_key=${API_KEY}&with_genres=53`,

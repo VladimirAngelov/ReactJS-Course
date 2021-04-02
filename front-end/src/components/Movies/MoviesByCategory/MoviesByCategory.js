@@ -55,7 +55,7 @@ const MovieByCategory = (props) => {
     const allMovies = movies.map(movie =>
         <span className={styles.categoryMoviePictures} key={movie.id}>
                     <Link to={'/movie/details/' + movie.id}>
-                        <img className="home-images" src={imageUrl + movie.poster_path} width={126} height={180}
+                        <img className="home-images" src={movie.poster_path !== null ? `${imageUrl}${movie.poster_path}` : `/notfound.png`} width={126} height={180}
                              alt={movie.title}/>
                     </Link>
             </span>)
