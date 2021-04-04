@@ -1,8 +1,8 @@
 #search-field {
-    padding-top: 15px;
+    padding-top: 12px;
     float: right;
     background-color: transparent;
-    border: 0;
+    border: none;
     border-bottom: 1px solid #ff8c00;
     color: #ff8c00;
     margin-right: 10px;

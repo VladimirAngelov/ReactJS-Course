@@ -41,11 +41,11 @@ const Movie = (props) => {
 
     const handleOnMouseOver = () => {
         icon.current.style.opacity = '1';
-        image.current.style.opacity = '70%'
+        // image.current.style.opacity = '70%'
     }
 
     const handleOnMouseOut = () => {
-        image.current.style.opacity = '100%'
+        // image.current.style.opacity = '100%'
         return icon.current.style.opacity = '0.5'
     }
 

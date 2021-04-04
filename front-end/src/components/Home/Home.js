@@ -1,11 +1,9 @@
 import React from 'react';
-import FeaturedMovies from "../Movies/home movies/FeaturedMovies";
-import Upcoming from "../Movies/home movies/Upcoming";
-import TopRated from "../Movies/home movies/TopRated";
+import HomeMovies from "../Movies/home movies/HomeMovies";
 import {Context} from "../../Store/Store";
 import {useContext} from 'react';
 import {Redirect} from "react-router-dom";
-import {Row} from 'react-bootstrap'
+
 const Home = () => {
     const [user] = useContext(Context)
 
@@ -13,19 +11,7 @@ const Home = () => {
         return <Redirect to="/login"/>
     }
 
-    return (
-        <>
-            <Row className="row">
-                <FeaturedMovies/>
-            </Row>
-            <Row className="row">
-                <Upcoming/>
-            </Row>
-            <Row className="row">
-                <TopRated/>
-            </Row>
-        </>
-    )
+    return <HomeMovies/>
 }
 
 export default Home;

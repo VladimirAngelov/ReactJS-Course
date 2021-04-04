@@ -5,6 +5,13 @@
     text-align: center;
 }
 
+.categoryContainer {
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*justify-content: center;*/
+    text-align: center;
+}
+
 .categoriesImages {
     margin: 5px 0 0 7px;
 }

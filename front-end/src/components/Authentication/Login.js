@@ -48,7 +48,7 @@ const Login = ({location}) => {
     }
 
     return (
-        <div>
+        <div className="auth-container">
             <div className="authForm">
                 <form onSubmit={handleSubmit} method="POST">
                     <label htmlFor="username">Username </label>

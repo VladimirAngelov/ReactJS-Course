@@ -4,10 +4,6 @@ body {
     height: 100%;
 }
 
-.container {
-    min-height: calc(100vh - 70px);
-}
-
 a {
     text-decoration: none;
 }
@@ -15,7 +11,7 @@ a {
 .home-title {
     color: white;
     font-weight: initial;
-    margin: 20px 0 0 5px;
+    margin: 20px 0 3px 10px;
 }
 
 .see-more {
@@ -26,11 +22,11 @@ a {
 
 .home-movie-pictures {
     margin: 5px 0 0 3px;
+    text-align: center;
 }
 
 .home-images:hover {
     box-shadow: 0 15px 15px #1B1B1B;
-
     transform: scale(1.08);
 }
 
@@ -50,14 +46,14 @@ a {
     color: darkorange;
 }
 
+.auth-container {
+    display: grid;
+    place-items: center;
+    margin-top: 100px;
+}
+
 .authForm {
-    position: absolute;
-    top: 20%;
-    left: 39%;
     text-align: center;
-    font-size: 13pt;
-    width: 300px;
-    height: 260px;
 }
 
 #registerBtn {
@@ -114,7 +110,13 @@ footer {
     display: none;
 }
 
+#basic-nav-dropdown {
+    margin-top: -8px;
+    float: right;
+}
+
 .dropdown-menu {
     background: #212429;
     box-shadow: 0 15px 15px #1B1B1B;
+    width: 40px;
 }

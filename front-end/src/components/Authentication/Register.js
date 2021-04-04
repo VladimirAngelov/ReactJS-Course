@@ -46,7 +46,7 @@ const Register = () => {
     }
 
     return (
-        <div>
+        <div className="auth-container">
             <div className="authForm">
 
                 <form onSubmit={handleSubmit}>

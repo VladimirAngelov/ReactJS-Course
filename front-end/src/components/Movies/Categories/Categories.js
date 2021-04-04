@@ -16,7 +16,7 @@ const Categories = () => {
     }
 
     return (
-        <>
+        <div className={style.categoryContainer}>
             <h2 className={style.title}>Categories</h2>
             <Row>
                 <div className={style.categoriesImages}>
@@ -57,7 +57,7 @@ const Categories = () => {
                     </Link>
                 </div>
             </Row>
-        </>
+        </div>
 
     )
 }

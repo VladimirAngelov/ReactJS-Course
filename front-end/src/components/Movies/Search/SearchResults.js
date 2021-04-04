@@ -40,14 +40,14 @@ const SearchResults = (props) => {
         )
 
     return (
-        <>
-            <h4 className="home-title">
-                {movieData.length > 1 ? `${movieData.length} Results` : `${movieData.length} Result`} for "{search}"
-            </h4>
+        <div className={style.searchedContainer}>
             <div className={style.pictures}>
+                <h4 className="home-title">
+                    {movieData.length > 1 ? `${movieData.length} Results` : `${movieData.length} Result`} for "{search}"
+                </h4>
                 {movieData}
             </div>
-        </>
+        </div>
     )
 }
 

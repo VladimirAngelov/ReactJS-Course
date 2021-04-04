@@ -4,7 +4,8 @@ import {getMovies} from "../../../movie-services/requests";
 import Loader from "../../Loader/Loader";
 import {Link, Redirect, useHistory} from "react-router-dom";
 import {Context} from "../../../Store/Store";
-import {Row} from 'react-bootstrap'
+import {Row, Col} from 'react-bootstrap'
+
 const imageUrl = `http://image.tmdb.org/t/p/w400`
 
 const MovieByCategory = (props) => {
@@ -55,21 +56,21 @@ const MovieByCategory = (props) => {
     const allMovies = movies.map(movie =>
         <span className={styles.categoryMoviePictures} key={movie.id}>
                     <Link to={'/movie/details/' + movie.id}>
-                        <img className="home-images" src={movie.poster_path !== null ? `${imageUrl}${movie.poster_path}` : `/notfound.png`} width={126} height={180}
+                        <img className="home-images"
+                             src={movie.poster_path !== null ? `${imageUrl}${movie.poster_path}` : `/notfound.png`}
+                             width={126} height={180}
                              alt={movie.title}/>
                     </Link>
             </span>)
 
     return (
         <Row className={`${styles['categories-container']}`}>
-            <div>
-                <h3 className={styles.title}>{path.toUpperCase()}</h3>
-                <div className={styles.allMovies}>
-                    {allMovies}
-                    <button id={styles['show-more-movies-button']} onClick={loadMore}>
-                        Show More
-                    </button>
-                </div>
+            <h3 className={styles.title}>{path.toUpperCase()}</h3>
+            <div className={styles.allMovies}>
+                {allMovies}
+                <button id={styles['show-more-movies-button']} onClick={loadMore}>
+                    Show More
+                </button>
             </div>
         </Row>
     )

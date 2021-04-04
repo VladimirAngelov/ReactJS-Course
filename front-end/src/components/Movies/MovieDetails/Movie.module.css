@@ -23,7 +23,7 @@
 }
 
 .detailsImage:hover{
-    opacity: 70%;
+    /*opacity: 70%;*/
     cursor: pointer;
 }
 
