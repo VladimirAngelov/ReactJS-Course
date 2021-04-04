@@ -1,5 +1,5 @@
 import {Link, Redirect, useHistory} from 'react-router-dom';
-import {useContext, useState} from 'react'
+import {useContext, useState, useRef} from 'react'
 import {Context} from "../../Store/Store";
 import {logout} from "../../authService/Logout";
 import Search from "../Movies/Search/Search";
@@ -11,8 +11,8 @@ const Navbar = () => {
     const [searchInput, setSearchInput] = useState(false)
     const [search, setSearch] = useState('')
     const screenWidth = window.screen.width
-    let isLoggedOut = false;
     const history = useHistory()
+    let isLoggedOut = false;
 
     const handleLogout = () => {
         return logout().then(() => {
@@ -32,7 +32,7 @@ const Navbar = () => {
 
     return (
         <Row>
-            <Col lg={12}  xl={screenWidth >= 1400 && 6} className={`${styles["top-navbar"]}`}>
+            <Col lg={12} xl={screenWidth >= 1400 && 6} className={`${styles["top-navbar"]}`}>
                 <Col sm={12}>
                     <Link to="/"><img id={styles.logo} src='/logo.png' alt="the trailers"/></Link>
                 </Col>
@@ -47,15 +47,33 @@ const Navbar = () => {
                     <>
                         <NavDropdown title={<img width={40} height={30} src="./icons8-menu-30.png" alt="menu"/>}
                                      id="basic-nav-dropdown">
-                            <Link className={styles.dropLink} to="/movies">Movies</Link>
-                            {user?.username !== '' && <Link className={styles.dropLink} to="/library">My Library</Link>}
+
+                            <NavDropdown.Item>
+                                <Link className={styles.dropLink} to="/movies">Movies</Link>
+                            </NavDropdown.Item>
+
                             {user?.username !== '' &&
-                            <Link className={styles.dropLink} onClick={handleLogout} to="">Logout</Link>}
-                            {user?.username === '' && <Link className={styles.dropLink} to="/register">Sign Up</Link>}
-                            {user?.username === '' && <Link className={styles.dropLink} to="/login">Sign In</Link>}
-                            <NavDropdown.Divider/>
-                            <NavDropdown.Item onClick={(e) => search ? handleSubmit(e) : setSearchInput(!searchInput)}>
-                                Search</NavDropdown.Item>
+                            <NavDropdown.Item>
+                                <Link className={styles.dropLink} to="/library">My Library</Link>
+                            </NavDropdown.Item>}
+
+                            {user?.username === '' &&
+                            <NavDropdown.Item>
+                                <Link className={styles.dropLink} to="/register">Sign Up</Link>
+                            </NavDropdown.Item>}
+
+                            {user?.username === '' && <NavDropdown.Item>
+                                <Link className={styles.dropLink} to="/login">Sign In</Link>
+                            </NavDropdown.Item>}
+
+                            {user.username !== '' && <NavDropdown.Item onClick={(e) => search ? handleSubmit(e) : setSearchInput(!searchInput)}>
+                                Search</NavDropdown.Item>}
+
+                            {user?.username !== '' &&
+                            <NavDropdown.Item>
+                                <Link className={styles.dropLink} onClick={handleLogout} to="">Logout</Link>
+                            </NavDropdown.Item>}
+
                         </NavDropdown>
                         {searchInput && <Search {...{search, setSearch, handleSubmit}} />}
                     </>
@@ -64,20 +82,20 @@ const Navbar = () => {
 
             {
                 screenWidth >= 1400 &&
-                    <>
-                        <Col sm={6} md={6} className={styles["right-nav"]}>
-                            {user?.username !== '' ? <Link onClick={handleLogout} to="">Logout</Link> : ''}
-                            {user?.username !== '' ? <Link to="/library">My Library</Link> : ''}
-                            {user?.username !== '' ? '' : <Link to="/login">Sign In</Link>}
-                            {user?.username !== '' ? '' : <Link to="/register">Sign Up</Link>}
-                            {user?.username !== '' ?
-                                <img onClick={(e) => search ? handleSubmit(e) : setSearchInput(!searchInput)}
-                                     id={styles["search-icon"]}
-                                     src="/icons8-search-20.png" alt=""/> : ''}
+                <>
+                    <Col sm={6} md={6} className={styles["right-nav"]}>
+                        {user?.username !== '' ? <Link onClick={handleLogout} to="">Logout</Link> : ''}
+                        {user?.username !== '' ? <Link to="/library">My Library</Link> : ''}
+                        {user?.username !== '' ? '' : <Link to="/login">Sign In</Link>}
+                        {user?.username !== '' ? '' : <Link to="/register">Sign Up</Link>}
+                        {user?.username !== '' ?
+                            <img onClick={(e) => search ? handleSubmit(e) : setSearchInput(!searchInput)}
+                                 id={styles["search-icon"]}
+                                 src="/icons8-search-20.png" alt=""/> : ''}
 
-                            {searchInput && <Search {...{search, setSearch, handleSubmit}} />}
-                        </Col>
-                    </>
+                        {searchInput && <Search {...{search, setSearch, handleSubmit}} />}
+                    </Col>
+                </>
             }
             {isLoggedOut && (<Redirect to="/"/>)}
         </Row>

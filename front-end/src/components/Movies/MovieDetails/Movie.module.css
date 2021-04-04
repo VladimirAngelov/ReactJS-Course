@@ -15,6 +15,11 @@
     cursor: pointer;
 }
 
+.detailsImageContainer {
+    display: grid;
+    place-items: center;
+}
+
 .detailsImage {
     max-width: 400px;
     height: 600px;
@@ -43,10 +48,6 @@
     text-shadow: 2px 2px 2px black;
 }
 
-.test {
-    text-align: left;
-}
-
 #libraryButton {
     color: #ff8c00;
     border: 1px solid #ff8c00;
@@ -56,10 +57,12 @@
 }
 
 .video {
-    width: 100%;
     max-width: 50%;
 }
 
 .cast {
     margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

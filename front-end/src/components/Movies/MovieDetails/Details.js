@@ -11,8 +11,6 @@ const Details = (props) => {
     const [user] = useContext(Context)
     const history = useHistory()
 
-    console.log(movie)
-
     useEffect(() => {
         getOneMovie(movieId)
             .then(res => setMovie(res))
