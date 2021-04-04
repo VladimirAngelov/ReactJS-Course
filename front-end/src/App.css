@@ -4,6 +4,10 @@ body {
     height: 100%;
 }
 
+.container {
+    min-height: calc(100vh - 70px);
+}
+
 a {
     text-decoration: none;
 }
