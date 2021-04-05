@@ -8,4 +8,4 @@ The app allows users to:
 * Read about actors movies and biography
 
 ## Tech stack:
-<img src="https://agileengine.com/wp-content/uploads/2018/02/mern.jpg" style="width: 100%;" alt="Mern-Stack"/>
+<img src="https://i.ibb.co/4JKj4t6/mern-stack.png" alt="mern-stack"/>
