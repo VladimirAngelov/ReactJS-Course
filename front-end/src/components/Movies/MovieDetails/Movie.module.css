@@ -28,7 +28,6 @@
 }
 
 .detailsImage:hover{
-    /*opacity: 70%;*/
     cursor: pointer;
 }
 
@@ -53,6 +52,7 @@
     border: 1px solid #ff8c00;
     background-color: #212429;
     box-shadow: 2px 2px 2px black;
+    text-shadow: 2px 2px 2px black;
     border-radius: 5px;
 }
 
@@ -65,4 +65,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+#hideTrailerButton {
+    margin-top: 15px;
+    color: #ff8c00;
+    border: 1px solid #ff8c00;
+    background-color: #212429;
+    text-shadow: 2px 2px 2px black;
+    box-shadow: 2px 2px 2px black;
+    border-radius: 5px;
+    width: 100%;
 }

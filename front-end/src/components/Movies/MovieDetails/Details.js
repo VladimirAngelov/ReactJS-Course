@@ -30,7 +30,7 @@ const Details = (props) => {
 
     return (
         <Row>
-            <Movie movie={movie} genres={genres} countries={countries} productionCompanies={productionCompanies}/>
+            <Movie movieId={movieId} movie={movie} genres={genres} countries={countries} productionCompanies={productionCompanies}/>
         </Row>
     )
 }

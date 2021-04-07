@@ -1,9 +1,10 @@
 #search-field {
     padding-top: 12px;
     float: right;
-    background-color: transparent;
+    background: transparent;
     border: none;
     border-bottom: 1px solid #ff8c00;
+    border-radius: 0;
     color: #ff8c00;
     margin-right: 10px;
     animation-duration: 2s;

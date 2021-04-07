@@ -30,6 +30,7 @@ function App() {
             if (currentUser.message) {
                 return setIsLoading(false)
             }
+
             setUser({_id: currentUser._id, username: currentUser.username})
             setIsLoading(false)
         }).catch(err => console.log(err))

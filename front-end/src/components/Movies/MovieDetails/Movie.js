@@ -51,7 +51,6 @@ const Movie = (props) => {
     const handleTrailerClick = (movie) => {
         if (trailerUrl) {
             setTrailerUrl('')
-            setIsLarge(false)
         } else {
             movieTrailer(movie?.title || '')
                 .then(url => {
@@ -85,27 +84,38 @@ const Movie = (props) => {
     return (
         <>
             <Row style={{margin: 0}}>
-                <Col sm={12} lg={6} xl={4}>
-                    <div className={styles.detailsImageContainer}>
-                        <img onClick={() => handleTrailerClick(props.movie)}
-                             ref={image}
-                             id="details-image"
-                             onMouseOver={handleOnMouseOver}
-                             onMouseOut={handleOnMouseOut}
-                             className={styles.detailsImage}
-                             src={props.movie.poster_path !== null ? `${imageUrl}${props.movie.poster_path}` : `/notfound.png`}
-                             width={300}
-                             height={450}
-                             alt={props.movie.title}/>
-                    </div>
-                        <span id='play-icon' onClick={() => handleTrailerClick(props.movie)}
-                             onMouseOver={handleOnMouseOver}
-                             className={styles.playIcon}>
-                            <img ref={icon} src="/play-icon.png" alt=""/>
+                <Col sm={12} lg={6} xl={trailerUrl ? 6 : 4}>
+                    {trailerUrl ?
+                        <>
+                            <YouTube videoId={trailerUrl} opt={options}/>
+                            <div>
+                                <button onClick={handleTrailerClick} id={styles.hideTrailerButton}>Hide Trailer</button>
+                            </div>
+                        </> :
+                        <>
+                            <div className={styles.detailsImageContainer}>
+                                {error && <p className="error-notification">{error}</p>}
+                                <img onClick={() => handleTrailerClick(props.movie)}
+                                     ref={image}
+                                     id="details-image"
+                                     onMouseOver={handleOnMouseOver}
+                                     onMouseOut={handleOnMouseOut}
+                                     className={styles.detailsImage}
+                                     src={props.movie.poster_path !== null ? `${imageUrl}${props.movie.poster_path}` : `/notfound.png`}
+                                     width={300}
+                                     height={450}
+                                     alt={props.movie.title}/>
+                            </div>
+                            <span id='play-icon' onClick={() => handleTrailerClick(props.movie)}
+                                  onMouseOver={handleOnMouseOver}
+                                  className={styles.playIcon}>
+                        <img ref={icon} src="/play-icon.png" alt=""/>
                         </span>
+                        </>
+                    }
                 </Col>
 
-                <Col sm={12} lg={6} xl={trailerUrl !== '' ? 2 : 4}>
+                <Col sm={12} lg={6} xl={6}>
                     <h2 id={styles.title} className={styles.information}>{props.movie.title || props.movie.name}</h2>
                     <h4 id={styles.tagline}>{props.movie.tagline?.length > 1 ? `"${props.movie.tagline}"` : ''}</h4>
 
@@ -114,8 +124,8 @@ const Movie = (props) => {
                         {props.movie.overview}
                     </p>
 
-                    {!isLarge && <BasicInformation movie={props.movie} genres={props.genres} countries={props.countries}
-                                                   productionCompanies={props.productionCompanies}/>}
+                    <BasicInformation movie={props.movie} genres={props.genres} countries={props.countries}
+                                      productionCompanies={props.productionCompanies}/>
 
                     {isInLibrary
                         ? <button id={styles.libraryButton} onClick={handleRemoveFromLibrary}>Remove from
@@ -123,20 +133,16 @@ const Movie = (props) => {
                         : <button id={styles.libraryButton} onClick={handleLibraryClick}>Add to Library</button>}
                 </Col>
 
-                <Col xs={12} xl={3} className={`${styles.video}`}>
-                    <div>
-                        {error && <p className="error-notification">{error}</p>}
-                        {trailerUrl && <YouTube videoId={trailerUrl} opt={options}/>}
-                        {isLarge &&
-                        <BasicInformation movie={props.movie} genres={props.genres} countries={props.countries}
-                                          productionCompanies={props.productionCompanies}/>}
-                    </div>
-                </Col>
+                {/*<Col xs={12} xl={3} className={`${styles.video}`}>*/}
+                {/*    <div>*/}
+                {/*        /!*{error && <p className="error-notification">{error}</p>}*!/*/}
+                {/*    </div>*/}
+                {/*</Col>*/}
                 {user.username === '' && <Redirect to="/login"/>}
             </Row>
 
             <Row className={styles.cast}>
-                <MovieCredits movieId={props.movie.id}/>
+                <MovieCredits movieId={props.movieId}/>
             </Row>
         </>
     )
