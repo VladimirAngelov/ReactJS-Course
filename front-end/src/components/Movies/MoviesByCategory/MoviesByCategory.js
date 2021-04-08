@@ -4,9 +4,9 @@ import {getMovies} from "../../../movie-services/requests";
 import Loader from "../../Loader/Loader";
 import {Link, Redirect, useHistory} from "react-router-dom";
 import {Context} from "../../../Store/Store";
-import {Row, Col} from 'react-bootstrap'
+import {Row} from 'react-bootstrap'
 
-const imageUrl = `http://image.tmdb.org/t/p/w400`
+const imageUrl = `http://image.tmdb.org/t/p/w780`
 
 const MovieByCategory = (props) => {
     const [movies, setMovies] = useState([])

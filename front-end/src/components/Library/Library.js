@@ -6,7 +6,7 @@ import libraryStyle from './Library.module.css'
 import Loader from "../Loader/Loader";
 import {Context} from "../../Store/Store";
 
-const imageUrl = `http://image.tmdb.org/t/p/w400/`
+const imageUrl = `http://image.tmdb.org/t/p/w1280/`
 
 const Library = () => {
     const [library, setLibrary] = useState([])

@@ -15,14 +15,8 @@
     cursor: pointer;
 }
 
-/*.detailsImageContainer {*/
-/*    display: grid;*/
-/*    place-items: center;*/
-/*}*/
-
 .detailsImage {
-    max-width: 300px;
-    height: 450px;
+    height: 480px;
     box-shadow: 0 15px 15px #1B1B1B;
     width: 100%;
 }
@@ -76,4 +70,16 @@
     box-shadow: 2px 2px 2px black;
     border-radius: 5px;
     width: 100%;
+}
+
+.detailsContainer {
+    margin: 0;
+}
+
+#backgroundDetails {
+    height: 480px;
+    width: 1300px;
+    z-index: -1;
+    position: absolute;
+    opacity: 0.2;
 }

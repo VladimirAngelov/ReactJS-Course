@@ -1,4 +1,3 @@
-import {useState, useEffect} from "react";
 import {Title, Table, Td, Th} from "./StyledActorCrew";
 
 const ActorCrew = ({actorCrew}) => {

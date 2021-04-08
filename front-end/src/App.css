@@ -18,6 +18,10 @@ a {
     margin: 20px 0 3px 10px;
 }
 
+.home-link {
+    max-width: 300px;
+}
+
 .see-more {
     font-size: 16px;
     color: #ababab;

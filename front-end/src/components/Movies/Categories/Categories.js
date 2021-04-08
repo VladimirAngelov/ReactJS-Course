@@ -2,7 +2,7 @@ import React, {useContext} from 'react'
 import {Link, Redirect, useHistory} from 'react-router-dom';
 import style from './Categories.module.css'
 import {Context} from "../../../Store/Store";
-import {Row, Col} from 'react-bootstrap';
+import {Row} from 'react-bootstrap';
 
 const Categories = () => {
     const [user] = useContext(Context)

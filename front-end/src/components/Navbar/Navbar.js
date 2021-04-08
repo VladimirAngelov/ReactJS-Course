@@ -1,5 +1,5 @@
 import {Link, Redirect, useHistory} from 'react-router-dom';
-import {useContext, useState, useRef} from 'react'
+import {useContext, useState} from 'react'
 import {Context} from "../../Store/Store";
 import {logout} from "../../authService/Logout";
 import Search from "../Movies/Search/Search";
