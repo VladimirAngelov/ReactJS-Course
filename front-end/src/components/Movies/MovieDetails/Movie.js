@@ -84,7 +84,7 @@ const Movie = (props) => {
     return (
         <>
             <Row style={{margin: 0}}>
-                <Col sm={12} lg={6} xl={trailerUrl ? 6 : 4}>
+                <Col sm={12} lg={6} xl={trailerUrl ? 6 : 3}>
                     {trailerUrl ?
                         <>
                             <YouTube videoId={trailerUrl} opt={options}/>
@@ -93,7 +93,7 @@ const Movie = (props) => {
                             </div>
                         </> :
                         <>
-                            <div className={styles.detailsImageContainer}>
+                            <div>
                                 {error && <p className="error-notification">{error}</p>}
                                 <img onClick={() => handleTrailerClick(props.movie)}
                                      ref={image}
@@ -102,8 +102,7 @@ const Movie = (props) => {
                                      onMouseOut={handleOnMouseOut}
                                      className={styles.detailsImage}
                                      src={props.movie.poster_path !== null ? `${imageUrl}${props.movie.poster_path}` : `/notfound.png`}
-                                     width={300}
-                                     height={450}
+
                                      alt={props.movie.title}/>
                             </div>
                             <span id='play-icon' onClick={() => handleTrailerClick(props.movie)}
@@ -132,12 +131,6 @@ const Movie = (props) => {
                             Library</button>
                         : <button id={styles.libraryButton} onClick={handleLibraryClick}>Add to Library</button>}
                 </Col>
-
-                {/*<Col xs={12} xl={3} className={`${styles.video}`}>*/}
-                {/*    <div>*/}
-                {/*        /!*{error && <p className="error-notification">{error}</p>}*!/*/}
-                {/*    </div>*/}
-                {/*</Col>*/}
                 {user.username === '' && <Redirect to="/login"/>}
             </Row>
 
