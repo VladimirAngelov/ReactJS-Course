@@ -10,13 +10,13 @@ const Navbar = () => {
     const [user, setUser] = useContext(Context)
     const [searchInput, setSearchInput] = useState(false)
     const [search, setSearch] = useState('')
+    const [isLoggedOut, setIsLoggedOut] = useState(false)
     const screenWidth = window.screen.width
     const history = useHistory()
-    let isLoggedOut = false;
 
     const handleLogout = () => {
         return logout().then(() => {
-            isLoggedOut = true;
+            setIsLoggedOut(true);
             setSearchInput(false)
             return setUser({username: '', _id: ''})
         }).catch(err => console.log(err))

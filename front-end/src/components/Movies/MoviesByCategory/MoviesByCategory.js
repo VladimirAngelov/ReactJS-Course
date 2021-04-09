@@ -19,7 +19,7 @@ const MovieByCategory = (props) => {
 
 
     useEffect(() => {
-        setCounter(counter + 1)
+        setCounter(prevState => prevState + 1)
 
         getMovies(path, counter)
             .then(movies => {
@@ -30,7 +30,7 @@ const MovieByCategory = (props) => {
     }, [path])
 
     const loadMore = () => {
-        setCounter(counter + 1)
+        setCounter(prevState => prevState + 1)
         return getMovies(path, counter)
             .then(movies => {
                 setMovies((prevState) => {

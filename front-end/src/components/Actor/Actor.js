@@ -12,7 +12,7 @@ const Actor = ({match}) => {
     const [user] = useContext(Context)
     const [actor, setActor] = useState({})
     const [fullBio, setFullBio] = useState(false)
-    const imageUrl = `http://image.tmdb.org/t/p/w400`
+    const imageUrl = `http://image.tmdb.org/t/p/w1280`
     const history = useHistory()
 
     useEffect(() => {

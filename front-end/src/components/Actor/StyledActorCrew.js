@@ -24,4 +24,13 @@ export const Td = styled.td`
   border-bottom: 1px solid white;
   //border-left: 1px solid white;
   text-align: center;
+  
+  a {
+    color: #ff8c00;
+    text-shadow: 3px 3px 3px black;
+    
+    &:hover {
+      opacity: 0.5;
+    }
+  }
 `

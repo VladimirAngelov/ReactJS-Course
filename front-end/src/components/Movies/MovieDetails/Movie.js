@@ -34,7 +34,7 @@ const Movie = (props) => {
     const image = useRef()
 
     useEffect(() => {
-        return getUserMovies()
+        getUserMovies()
             .then(movies => {
                 const found = movies.find(m => m.id.toString() === movieId?.toString())
                 if (found) setIsInLibrary(true)
