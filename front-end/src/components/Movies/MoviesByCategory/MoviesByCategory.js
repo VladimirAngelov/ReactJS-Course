@@ -17,7 +17,6 @@ const MovieByCategory = (props) => {
 
     const path = props.match.params.category
 
-
     useEffect(() => {
         setCounter(prevState => prevState + 1)
 

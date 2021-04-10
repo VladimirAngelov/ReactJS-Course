@@ -28,7 +28,7 @@ const TopFeatured = ({topFeaturedMovieId}) => {
         <>
             <Col xl={4}>
                 {
-                    screenWidth >= 1400 ?
+                    screenWidth >= 770 ?
                         <>
                             <Title>
                                 {movie?.title} <br/>
@@ -40,9 +40,10 @@ const TopFeatured = ({topFeaturedMovieId}) => {
                             </Title>
                         </> :
                         <>
-                            <Title>
+                            <Title style={{marginTop: 40}}>
                                 {movie?.title} <br/>
-                                <MovieRating movie={movie}/>
+                                <MovieRating movie={movie}/> <br/>
+                                <ShowDetails><Link to={`/movie/details/${movie.id}`}>SHOW DETAILS</Link></ShowDetails>
                             </Title>
                         </>
                 }
@@ -52,7 +53,13 @@ const TopFeatured = ({topFeaturedMovieId}) => {
                     <>
                         <Image style={{marginTop: -70}} src={`${imageUrl}${movie?.backdrop_path}`} fluid/>
                     </> :
-                    <Image src={`${imageUrl}${movie?.backdrop_path}`} fluid/>
+                    <>
+                        {
+                            screenWidth <= 414 ?
+                                <Image style={{height: 195}} src={`${imageUrl}${movie?.backdrop_path}`} fluid/> :
+                                <Image src={`${imageUrl}${movie?.backdrop_path}`} fluid/>
+                        }
+                    </>
             }
         </>
     )
