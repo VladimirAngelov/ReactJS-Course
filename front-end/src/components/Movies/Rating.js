@@ -1,4 +1,3 @@
-import {useState} from 'react'
 import Rate from 'rc-rate'
 import 'rc-rate/assets/index.css';
 

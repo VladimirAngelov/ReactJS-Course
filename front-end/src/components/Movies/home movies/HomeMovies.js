@@ -1,7 +1,7 @@
 import {Component} from 'react'
 import {getMovies} from "../../../movie-services/requests";
 import Loader from "../../Loader/Loader";
-import {Row, Col} from 'react-bootstrap';
+import {Row} from 'react-bootstrap';
 import HomeMovieCard from "./HomeMovieCard";
 import HomeMovieRow from "./HomeMovieRow";
 import TopFeatured from './TopFeatured'

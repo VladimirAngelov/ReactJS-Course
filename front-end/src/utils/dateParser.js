@@ -39,6 +39,7 @@ const dateParser = (date) => {
         case '12':
             parsedDate = `${dateArr[2]}.Dec.${dateArr[0]}`
             break;
+        default: return parsedDate
     }
 
     return parsedDate
