@@ -1,9 +1,11 @@
 import {Component} from 'react'
 import {getMovies} from "../../../movie-services/requests";
 import Loader from "../../Loader/Loader";
-import {Row} from 'react-bootstrap';
+import {Row, Col} from 'react-bootstrap';
 import HomeMovieCard from "./HomeMovieCard";
 import HomeMovieRow from "./HomeMovieRow";
+import TopFeatured from './TopFeatured'
+
 const screenWidth = window.screen.width <= 1400
 
 export default class HomeMovies extends Component {
@@ -14,28 +16,30 @@ export default class HomeMovies extends Component {
             featured: [],
             upcoming: [],
             topRated: [],
+            firstFeatured: '',
             isLoading: true
         }
     }
 
     componentDidMount() {
-        getMovies('featured')
-            .then((res) => {
-                let data = res.slice(0, 10)
-                this.setState({featured: data, isLoading: false})
-            })
+        Promise.all([
+            getMovies('featured'),
+            getMovies('upcoming'),
+            getMovies('top-rated')
+        ]).then(([featured, upcoming, topRated]) => {
+            this.setState({
+                featured: featured.slice(0, 10),
+                firstFeatured: featured[Math.floor(Math.random() * 10)],
+                upcoming: upcoming.slice(0, 10),
+                topRated: topRated.slice(0, 10),
+                isLoading: false
+            });
+            this.featuredIntarval = setInterval(() => this.setState(({firstFeatured: this.state.featured[Math.floor(Math.random() * 10)]})), 10 * 1000)
+        });
+    }
 
-        getMovies('upcoming')
-            .then((res) => {
-                let data = res.slice(0, 10)
-                this.setState({upcoming: data, isLoading: false})
-            })
-
-        getMovies('top-rated')
-            .then((res) => {
-                let data = res.slice(0, 10)
-                this.setState({topRated: data, isLoading: false})
-            })
+    componentWillUnmount() {
+        clearInterval(this.featuredIntarval);
     }
 
     render() {
@@ -51,6 +55,9 @@ export default class HomeMovies extends Component {
 
         return (
             <>
+                <Row>
+                    <TopFeatured topFeaturedMovieId={this.state.firstFeatured.id}/>
+                </Row>
                 <Row>
                     <HomeMovieRow movies={featured} name="Featured" link="featured" screenWidth={screenWidth}/>
                 </Row>

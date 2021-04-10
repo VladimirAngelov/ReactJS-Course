@@ -28,6 +28,24 @@ a {
     width: 20%;
 }
 
+.img-fluid {
+    width: 99%;
+    max-height: 500px;
+    margin-left: 10px;
+    mask-image: radial-gradient(circle, rgba(33,36,41,0.3841911764705882) 0%, rgba(60,204,43,0) 100%);
+    z-index: -1;
+}
+
+.rc-rate li {
+    color: white;
+    font-size: 20px;
+    margin-top: 5px;
+}
+
+.rc-rate {
+    margin-bottom: -5px;
+}
+
 .home-movie-pictures {
     margin: 5px 0 0 3px;
     text-align: center;

@@ -1,7 +1,12 @@
 import styles from "./Movie.module.css";
 import React from "react";
+import MovieRating from "../Rating";
 
 const BasicInformation = (props) => {
+    const hours = props.movie?.runtime / 60
+    const minutes = (hours - Math.trunc(hours)) * 60
+    const runtime = `${Math.trunc(hours)}h : ${Math.ceil(minutes)}m`
+
     return (
     <>
         <p className={styles.information}>
@@ -26,14 +31,12 @@ const BasicInformation = (props) => {
 
         <p className={styles.information}>
             {props.movie?.runtime > 0 ? <span className={styles.titles}>Runtime: </span> : ''}
-            {props.movie?.runtime > 0 ? props.movie.runtime + 'm.' : ''}
+            {props.movie?.runtime > 0 ? runtime : ''}
         </p>
 
-        {/*<p className={styles.information}>*/}
-        {/*    {props.productionCompanies?.length > 0 ?*/}
-        {/*        <span className={styles.titles}>Production Companies: </span> : ''}*/}
-        {/*    {props.productionCompanies?.length > 0 ? props.productionCompanies : ''}*/}
-        {/*</p>*/}
+        <p className={styles.information}>
+            <MovieRating movie={props.movie}/>
+        </p>
     </>
     )
 }
