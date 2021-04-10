@@ -48,6 +48,7 @@
     box-shadow: 2px 2px 2px black;
     text-shadow: 2px 2px 2px black;
     border-radius: 5px;
+    margin-top: 5px;
 }
 
 .video {
@@ -82,4 +83,8 @@
     z-index: -1;
     position: absolute;
     opacity: 0.2;
+}
+
+.ratingInfo {
+    margin-top: -10px;
 }

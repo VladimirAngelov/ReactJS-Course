@@ -1,17 +1,16 @@
 import styles from "./Movie.module.css";
 import React from "react";
 import MovieRating from "../Rating";
+import movieBudgetParser from "../../../utils/movieBudgetParser";
+import dateParser from "../../../utils/dateParser";
+import runtimeParser from "../../../utils/runtimeParser";
 
 const BasicInformation = (props) => {
-    const hours = props.movie?.runtime / 60
-    const minutes = (hours - Math.trunc(hours)) * 60
-    const runtime = `${Math.trunc(hours)}h : ${Math.ceil(minutes)}m`
-
     return (
     <>
         <p className={styles.information}>
             <span className={styles.titles}>Release Date: </span>
-            {props.movie.release_date || props.movie.first_air_date}
+            {dateParser(props.movie.release_date)}
         </p>
 
         <p className={styles.information}>
@@ -26,17 +25,17 @@ const BasicInformation = (props) => {
 
         <p className={styles.information}>
             {props.movie.budget > 0 ? <span className={styles.titles}>Budget: </span> : ''}
-            {props.movie.budget > 0 ? '$' + props.movie.budget : ''}
+            {props.movie.budget > 0 ? '$' + movieBudgetParser(props.movie.budget) : ''}
         </p>
 
         <p className={styles.information}>
             {props.movie?.runtime > 0 ? <span className={styles.titles}>Runtime: </span> : ''}
-            {props.movie?.runtime > 0 ? runtime : ''}
+            {props.movie?.runtime > 0 ? runtimeParser(props.movie.runtime) : ''}
         </p>
 
-        <p className={styles.information}>
-            <MovieRating movie={props.movie}/>
-        </p>
+        <div className={styles.ratingInfo}>
+            {props.movie?.vote_average ? <MovieRating movie={props.movie}/> : ''}
+        </div>
     </>
     )
 }

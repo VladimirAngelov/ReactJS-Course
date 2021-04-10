@@ -43,9 +43,7 @@ export default class HomeMovies extends Component {
     }
 
     render() {
-        if (this.state.isLoading) {
-            return <Loader/>
-        }
+        if (this.state.isLoading) return <Loader/>
 
         const featured = this.state.featured.map(movie => <HomeMovieCard key={movie.id} movie={movie}/>)
 

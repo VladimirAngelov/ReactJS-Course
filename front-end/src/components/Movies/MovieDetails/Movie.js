@@ -121,7 +121,7 @@ const Movie = (props) => {
                     }
                 </Col>
 
-                <Col sm={12} lg={6} xl={ trailerUrl ? 6 : 7}>
+                <Col sm={12} lg={6} xl={ trailerUrl ? 6 : 9}>
                     <h2 id={styles.title} className={styles.information}>{props.movie.title || props.movie.name}</h2>
                     <h4 id={styles.tagline}>{props.movie.tagline?.length > 1 ? `"${props.movie.tagline}"` : ''}</h4>
 
@@ -132,7 +132,6 @@ const Movie = (props) => {
 
                     <BasicInformation movie={props.movie} genres={props.genres} countries={props.countries}
                                       productionCompanies={props.productionCompanies}/>
-
                     {isInLibrary
                         ? <button id={styles.libraryButton} onClick={handleRemoveFromLibrary}>Remove from
                             Library</button>

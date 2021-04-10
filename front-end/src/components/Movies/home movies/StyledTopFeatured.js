@@ -34,3 +34,10 @@ export const ShowDetails = styled.span`
     }
   }
 `
+
+export const RatingInNumbers = styled.div`
+  color: white;
+  font-size: 16px;
+  display: inline-block;
+  margin-bottom: 5px;
+`
