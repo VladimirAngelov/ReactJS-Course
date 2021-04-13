@@ -14,7 +14,7 @@ const MovieByCategory = (props) => {
     const [user] = useContext(Context)
     const history = useHistory()
     const path = props.match.params.category
-    let pageCounter = 3;
+    let pageCounter = 2;
 
     useEffect(() => {
         Promise.all([

@@ -1,12 +1,14 @@
-import React, {useEffect, useState} from 'react'
-import {Link, withRouter} from "react-router-dom";
+import React, {useContext, useEffect, useState} from 'react'
+import {Link, Redirect, withRouter} from "react-router-dom";
 import style from './SearchResults.module.css'
 import {searchMovie} from "../../../movie-services/requests";
 import Loader from "../../Loader/Loader";
+import {Context} from "../../../Store/Store";
 
 const imageUrl = `http://image.tmdb.org/t/p/w400`
 
 const SearchResults = (props) => {
+    const [user] = useContext(Context)
     const [results, setResults] = useState([])
     const search = props.match.params.search
     const [isLoading, setIsLoading] = useState(true)
@@ -19,11 +21,9 @@ const SearchResults = (props) => {
             })
     }, [search])
 
-    if (isLoading) {
-        return (
-            <Loader/>
-        )
-    }
+    if (isLoading) return <Loader/>
+
+    if (user.username === '') return <Redirect to='/login'/>
 
     let movieData = results
         .filter(x => x.poster_path !== null)

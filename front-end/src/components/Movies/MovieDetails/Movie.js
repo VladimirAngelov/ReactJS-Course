@@ -12,8 +12,8 @@ import {Col, Row} from 'react-bootstrap'
 import Loader from "../../Loader/Loader";
 
 const options = {
-    height: '200',
-    width: '300',
+    height: '100%',
+    width: '100%',
     playerVars: {
         autoplay: 1,
     }
