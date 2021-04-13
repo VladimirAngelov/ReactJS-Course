@@ -1,7 +1,12 @@
+html, body {
+    overflow-x: hidden;
+}
+
 body {
     background-color: #212429;
     margin: 0;
     height: 100%;
+    width: 100%;
 }
 
 .container {
