@@ -90,7 +90,8 @@ const Movie = (props) => {
     return (
         <>
             <Row className={styles.detailsContainer}>
-                {screenWidth >= 770 && <img id={styles.backgroundDetails} src={`${backgroundImageUrl}${props.movie.backdrop_path}`} alt=""/>}
+                {screenWidth >= 770 &&
+                <img id={styles.backgroundDetails} src={`${backgroundImageUrl}${props.movie.backdrop_path}`} alt=""/>}
                 <Col md={6} sm={12} lg={6} xl={trailerUrl ? 6 : 3}>
                     {trailerUrl ?
                         <>
@@ -99,7 +100,7 @@ const Movie = (props) => {
                                 <button onClick={handleTrailerClick} id={styles.hideTrailerButton}>Hide Trailer</button>
                             </div>
                         </> :
-                        <>
+                        <div style={{display: 'flex', justifyContent: 'center'}}>
                             <div>
                                 {error && <p className="error-notification">{error}</p>}
                                 <img onClick={() => handleTrailerClick(props.movie)}
@@ -109,7 +110,6 @@ const Movie = (props) => {
                                      onMouseOut={handleOnMouseOut}
                                      className={styles.detailsImage}
                                      src={props.movie.poster_path !== null ? `${imageUrl}${props.movie.poster_path}` : `/notfound.png`}
-
                                      alt={props.movie.title}/>
                             </div>
                             <span id='play-icon' onClick={() => handleTrailerClick(props.movie)}
@@ -117,11 +117,11 @@ const Movie = (props) => {
                                   className={styles.playIcon}>
                         <img ref={icon} src="/play-icon.png" alt=""/>
                         </span>
-                        </>
+                        </div>
                     }
                 </Col>
 
-                <Col sm={12} lg={6} xl={ trailerUrl ? 6 : 9}>
+                <Col sm={12} lg={6} xl={trailerUrl ? 6 : 9}>
                     <h2 id={styles.title} className={styles.information}>{props.movie.title || props.movie.name}</h2>
                     <h4 id={styles.tagline}>{props.movie.tagline?.length > 1 ? `"${props.movie.tagline}"` : ''}</h4>
 
@@ -140,7 +140,7 @@ const Movie = (props) => {
                 {user.username === '' && <Redirect to="/login"/>}
             </Row>
 
-            <Row className={styles.cast}>
+            <Row style={{paddingRight: 0}} className={styles.cast}>
                 <MovieCredits movieId={props.movieId}/>
             </Row>
         </>

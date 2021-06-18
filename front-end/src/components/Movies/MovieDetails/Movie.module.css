@@ -10,7 +10,7 @@
     color: white;
     position: absolute;
     top: 30%;
-    padding-left: 100px;
+    /*padding-left: 100px;*/
     opacity: 0.5;
     cursor: pointer;
 }
@@ -62,6 +62,13 @@
     justify-content: center;
 }
 
+.cast:after {
+    box-sizing: unset;
+}
+
+.cast:before {
+    box-sizing: unset;
+}
 #hideTrailerButton {
     margin-top: 15px;
     color: #ff8c00;
